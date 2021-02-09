@@ -1,0 +1,201 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Briefly tell us what happened</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="vehicle_form_step5" autocomplete="off">
+
+    <div *ngIf="damage_type !== 'Theft'">
+
+    <div class="div-que">
+      <ion-label class="lbl-head">Was someone driving the vehicle?</ion-label>
+
+      <ion-radio-group formControlName="someOne_driving">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-Y" *ngIf="this.vehicle_form_step5.get('someOne_driving').value == 'true'">
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Name of Driver</ion-label>
+        <ion-input type="text" formControlName="name_of_driver" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="vehicle_form_step5.controls.name_of_driver.hasError('required') && vehicle_form_step5.controls.name_of_driver.touched">
+        <p class="content">Please Enter Name!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Street</ion-label>
+        <ion-input type="text" formControlName="street" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="vehicle_form_step5.controls.street.hasError('required') && vehicle_form_step5.controls.street.touched">
+        <p class="content">Please Enter Street!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+        <ion-input type="text" formControlName="town" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="vehicle_form_step5.controls.town.hasError('required') && vehicle_form_step5.controls.town.touched">
+        <p class="content">Please Enter Town!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+        <ion-input type="number" formControlName="postal_code" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="vehicle_form_step5.controls.postal_code.hasError('required') && vehicle_form_step5.controls.postal_code.touched">
+        <p class="content">Please Enter Postcode!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Date of Birth</ion-label>
+        <ion-datetime placeholder="Select Date" class="input-box box" formControlName="date_of_birth"
+          displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="vehicle_form_step5.controls.date_of_birth.hasError('required') && vehicle_form_step5.controls.date_of_birth.touched">
+        <p class="content">Please Select Date!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">License Number</ion-label>
+        <ion-textarea rows="3" formControlName="license_no" type="text" color="primary" class="input-box">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="vehicle_form_step5.controls.license_no.hasError('required') && vehicle_form_step5.controls.license_no.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="vehicle_form_step5.controls.license_no.hasError('maxlength') && vehicle_form_step5.controls.license_no.touched">
+        <p class="content">Allow Only 25 Characters!</p>
+      </ion-item>
+
+      <div class="div-que add-margin">
+        <ion-label class="lbl-head">Did the driver consume alcohol or drugs 24 hours prior to the incident?</ion-label>
+
+        <ion-radio-group formControlName="drugs_24">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+      <div class="div-Y" *ngIf="this.vehicle_form_step5.get('drugs_24').value == 'true'">
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">What was consumed?</ion-label>
+          <ion-input type="text" formControlName="what_consume" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="vehicle_form_step5.controls.what_consume.hasError('required') && vehicle_form_step5.controls.what_consume.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="item-dropdown add">
+          <ion-label position="stacked" class="lbl-dropdown">Blood test result</ion-label>
+          <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="blood_test_result"
+            class="btn-select bg" mode="md">
+            <ion-select-option value="Positive">Positive</ion-select-option>
+            <ion-select-option value="Negative">Negative</ion-select-option>
+            <ion-select-option value="To be advised">To be advised</ion-select-option>
+            <ion-select-option value="I don’t know">I don’t know</ion-select-option>
+            <ion-select-option value="Not applicable">Not applicable</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="vehicle_form_step5.controls.blood_test_result.hasError('required') && vehicle_form_step5.controls.blood_test_result.touched">
+          <p class="content">Please Select Required Field!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="item-dropdown add">
+          <ion-label position="stacked" class="lbl-dropdown">Alcohol test result</ion-label>
+          <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="alcohol_test_result"
+            class="btn-select bg" mode="md">
+            <ion-select-option value="Positive">Positive</ion-select-option>
+            <ion-select-option value="Negative">Negative</ion-select-option>
+            <ion-select-option value="To be advised">To be advised</ion-select-option>
+            <ion-select-option value="I don’t know">I don’t know</ion-select-option>
+            <ion-select-option value="Not applicable">Not applicable</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="vehicle_form_step5.controls.alcohol_test_result.hasError('required') && vehicle_form_step5.controls.alcohol_test_result.touched">
+          <p class="content">Please Select Required Field!</p>
+        </ion-item>
+
+      </div>
+
+    </div>
+
+    </div>
+
+    <ion-label class="lbl-contact add-margin">Briefly</ion-label>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Briefly tell Us what happened</ion-label>
+      <ion-textarea rows="3" formControlName="briefly_tell_Us" type="text" color="primary" class="input-box">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="vehicle_form_step5.controls.briefly_tell_Us.hasError('required') && vehicle_form_step5.controls.briefly_tell_Us.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="vehicle_form_step5.controls.briefly_tell_Us.hasError('maxlength') && vehicle_form_step5.controls.briefly_tell_Us.touched">
+      <p class="content">Allow Only 400 Characters!</p>
+    </ion-item>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" routerLink="/vehicle-step6">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon></ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

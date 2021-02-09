@@ -1,0 +1,90 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Theft</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="theft_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Theft Details</ion-label>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Was the vehicle locked?</ion-label>
+
+      <ion-radio-group formControlName="vehicle_was_locked">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Was the vehicle stolen?</ion-label>
+
+      <ion-radio-group formControlName="vehicle_was_stolen">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.theft_form.get('vehicle_was_stolen').value == 'true'">
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Has the vehicle been recovered?</ion-label>
+
+        <ion-radio-group formControlName="vehicle_recovered">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

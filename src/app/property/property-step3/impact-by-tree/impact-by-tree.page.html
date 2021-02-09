@@ -1,0 +1,197 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Impact by tree</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="impact_by_tree_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Impact by tree Details</ion-label>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Was anyone cutting or lopping the tree when the impact occurred?</ion-label>
+
+      <ion-radio-group formControlName="cutting_lopping">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.impact_by_tree_form.get('cutting_lopping').value == 'true'">
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Name of tree cutter</ion-label>
+        <ion-input type="text" formControlName="name_party" color="primary" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="impact_by_tree_form.controls.name_party.hasError('required') && impact_by_tree_form.controls.name_party.touched">
+        <p class="content">Please Enter Name!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Type of tree cutter</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="was_tree_cutter"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Professional Tree Lopper">Professional Tree Lopper</ion-select-option>
+          <ion-select-option value="Not known">Not known</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="impact_by_tree_form.controls.was_tree_cutter.hasError('required') && impact_by_tree_form.controls.was_tree_cutter.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="impact_by_tree_form.get('was_tree_cutter').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="was_tree_cutter_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="impact_by_tree_form.controls.was_tree_cutter_other.hasError('required') && impact_by_tree_form.controls.was_tree_cutter_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Prior to the impact was the tree or branch in a safe condition?</ion-label>
+
+      <ion-radio-group formControlName="tree_branch_condition">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-N" *ngIf="this.impact_by_tree_form.get('tree_branch_condition').value == 'false'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">How did you know?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="how_you_know"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="The tree appeared diseased">The tree appeared diseased</ion-select-option>
+          <ion-select-option value="The tree appeared dangerous">The tree appeared dangerous</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="impact_by_tree_form.controls.how_you_know.hasError('required') && impact_by_tree_form.controls.how_you_know.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="impact_by_tree_form.get('how_you_know').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="how_you_know_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="impact_by_tree_form.controls.how_you_know_other.hasError('required') && impact_by_tree_form.controls.how_you_know_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Was the owner aware the tree was a danger to your property?</ion-label>
+
+        <ion-radio-group formControlName="is_owner_aware">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </div>
+
+      <div class="div-Y" *ngIf="this.impact_by_tree_form.get('is_owner_aware').value == 'true'">
+
+        <ion-item lines="none" class="item-dropdown add">
+          <ion-label position="stacked" class="lbl-dropdown">How were they made aware?</ion-label>
+          <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="how_made_aware"
+            class="btn-select bg" mode="md">
+            <ion-select-option value="We had complained in writing">We had complained in writing</ion-select-option>
+            <ion-select-option value="We complained verbally">We complained verbally</ion-select-option>
+            <ion-select-option value="It was obviously dangerous">It was obviously dangerous</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="impact_by_tree_form.controls.how_made_aware.hasError('required') && impact_by_tree_form.controls.how_made_aware.touched">
+          <p class="content">Please Select Required Field!</p>
+        </ion-item>
+
+        <!-- Other -->
+        <div *ngIf="impact_by_tree_form.get('how_made_aware').value == 'Other'">
+          <ion-item lines="none" class="input-item add">
+            <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+            <ion-input type="text" color="primary" formControlName="how_made_aware_other" class="input-box">
+            </ion-input>
+          </ion-item>
+
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="impact_by_tree_form.controls.how_made_aware_other.hasError('required') && impact_by_tree_form.controls.how_made_aware_other.touched">
+            <p class="content">Please Enter Required Field!</p>
+          </ion-item>
+        </div>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

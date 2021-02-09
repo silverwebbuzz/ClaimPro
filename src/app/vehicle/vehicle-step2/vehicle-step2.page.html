@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Client / Policyholder</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="vehicle_form_step2" autocomplete="off">
+
+    <ion-item lines="none" class="item-dropdown">
+      <ion-label position="stacked" class="lbl-dropdown">Make of vehicle</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="make" class="btn-select bg" mode="md">
+        <ion-select-option value="Demo1">Demo1</ion-select-option>
+        <ion-select-option value="Demo2">Demo2</ion-select-option>
+        <ion-select-option value="Demo3">Demo3</ion-select-option>
+        <ion-select-option value="Demo4">Demo4</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="vehicle_form_step2.controls.make.hasError('required') && vehicle_form_step2.controls.make.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Model</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="model" class="btn-select bg" mode="md">
+        <ion-select-option value="model1">model1</ion-select-option>
+        <ion-select-option value="model2">model2</ion-select-option>
+        <ion-select-option value="model3">model3</ion-select-option>
+        <ion-select-option value="model4">model4</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="vehicle_form_step2.controls.model.hasError('required') && vehicle_form_step2.controls.model.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Year</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="year" class="btn-select bg" mode="md">
+        <ion-select-option value="year1">year1</ion-select-option>
+        <ion-select-option value="year2">year2</ion-select-option>
+        <ion-select-option value="year3">year3</ion-select-option>
+        <ion-select-option value="year4">year4</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="vehicle_form_step2.controls.year.hasError('required') && vehicle_form_step2.controls.year.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Body type</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="type_of_body" class="btn-select bg" mode="md">
+        <ion-select-option value="type_of_body1">type_of_body1</ion-select-option>
+        <ion-select-option value="type_of_body2">type_of_body2</ion-select-option>
+        <ion-select-option value="type_of_body3">type_of_body3</ion-select-option>
+        <ion-select-option value="type_of_body4">type_of_body4</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="vehicle_form_step2.controls.type_of_body.hasError('required') && vehicle_form_step2.controls.type_of_body.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Registration Number</ion-label>
+      <ion-input type="text" formControlName="reg_number" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="vehicle_form_step2.controls.reg_number.hasError('required') && vehicle_form_step2.controls.reg_number.touched">
+      <p class="content">Please Enter Registration Number!</p>
+    </ion-item>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next"(click)="vehicleStep2Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

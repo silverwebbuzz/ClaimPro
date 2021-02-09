@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Incident details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="professional_form_step5" autocomplete="off">
+
+    <div class="div-que">
+      <ion-label class="lbl-head">Does the complaint refer to a personal injury?</ion-label>
+
+      <ion-radio-group formControlName="personal_injury">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-Y" *ngIf="this.professional_form_step5.get('personal_injury').value == 'true'">
+
+      <ion-item lines="none" class="input-item">
+        <ion-label position="stacked" class="input-lbl">How did the injury occur?</ion-label>
+        <ion-textarea rows="3" formControlName="how_injury_occur" type="text" color="primary" class="input-box">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step5.controls.how_injury_occur.hasError('required') && professional_form_step5.controls.how_injury_occur.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step5.controls.how_injury_occur.hasError('maxlength') && professional_form_step5.controls.how_injury_occur.touched">
+        <p class="content">Allow Only 140 Characters!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Nature of injury</ion-label>
+        <ion-textarea rows="3" formControlName="nature_injury" type="text" color="primary" class="input-box">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step5.controls.nature_injury.hasError('required') && professional_form_step5.controls.nature_injury.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step5.controls.nature_injury.hasError('maxlength') && professional_form_step5.controls.nature_injury.touched">
+        <p class="content">Allow Only 140 Characters!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">When did this occur?</ion-label>
+        <ion-datetime placeholder="Select Date" class="input-box box" formControlName="date_loss"
+          displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step5.controls.date_loss.hasError('required') && professional_form_step5.controls.date_loss.touched">
+        <p class="content">Please Select Date!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">What time did this occur?</ion-label>
+          <ion-datetime placeholder="Select Time" class="input-box box" formControlName="time_loss" displayFormat="hh:mm A">
+          </ion-datetime>
+        </ion-item>
+    
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="professional_form_step5.controls.time_loss.hasError('required') && professional_form_step5.controls.time_loss.touched">
+          <p class="content">Please Select Time!</p>
+        </ion-item>
+
+    </div>
+
+    <ion-item class="item-dropdown add" lines="none">
+      <ion-label position="stacked" class="lbl-dropdown">What has been damaged?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="reported_loss"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Personal Property">Personal Property</ion-select-option>
+        <ion-select-option value="Neighbours Property">Neighbours Property</ion-select-option>
+        <ion-select-option value="Third Party Vehicle">Third Party Vehicle</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step5.controls.reported_loss.hasError('required') && professional_form_step5.controls.reported_loss.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="professional_form_step5.get('reported_loss').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+        <ion-input type="text" color="primary" formControlName="reported_loss_other" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step5.controls.reported_loss_other.hasError('required') && professional_form_step5.controls.reported_loss_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-item class="item-dropdown add" lines="none">
+      <ion-label position="stacked" class="lbl-dropdown">Type of damage</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="type_damage"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Water Damage">Water Damage</ion-select-option>
+        <ion-select-option value="Fire">Fire</ion-select-option>
+        <ion-select-option value="Smoke">Smoke</ion-select-option>
+        <ion-select-option value="Dent">Dent</ion-select-option>
+        <ion-select-option value="Scratch">Scratch</ion-select-option>
+        <ion-select-option value="Broken">Broken</ion-select-option>
+        <ion-select-option value="Lost">Lost</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step5.controls.type_damage.hasError('required') && professional_form_step5.controls.type_damage.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="professional_form_step5.get('type_damage').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+        <ion-input type="text" color="primary" formControlName="type_damage_other" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step5.controls.type_damage_other.hasError('required') && professional_form_step5.controls.type_damage_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">How did the damage occur?</ion-label>
+      <ion-textarea rows="3" formControlName="how_damage_occur" type="text" color="primary" class="input-box">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step5.controls.how_damage_occur.hasError('required') && professional_form_step5.controls.how_damage_occur.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step5.controls.how_damage_occur.hasError('maxlength') && professional_form_step5.controls.how_damage_occur.touched">
+      <p class="content">Allow Only 140 Characters!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Do you know the cost of the damage?</ion-label>
+      <ion-input type="number" formControlName="reported_gross_estimate" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step5.controls.reported_gross_estimate.hasError('required') && professional_form_step5.controls.reported_gross_estimate.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="professionalStep5Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+      <!-- (click)="genralNext()" -->
+    </ion-col>
+  </ion-row>
+</ion-footer>

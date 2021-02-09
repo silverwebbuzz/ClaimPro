@@ -1,0 +1,205 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Incident details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="medical_form_step3" autocomplete="off">
+
+    <div class="div-que">
+      <ion-label class="lbl-head">Has a professional overseeing body written to you?</ion-label>
+
+      <ion-radio-group formControlName="regulator_inform">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-Y" *ngIf="this.medical_form_step3.get('regulator_inform').value == 'true'">
+
+      <ion-item class="item-dropdown" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Which organisation?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="regulator" class="btn-select bg" mode="md">
+            <ion-select-option *ngFor="let opt of regulator | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+          <!-- <ion-select-option value="AHPRA">AHPRA</ion-select-option>
+          <ion-select-option value="HCCC">HCCC</ion-select-option>
+          <ion-select-option value="OHO">OHO</ion-select-option>
+          <ion-select-option value="Coroner">Coroner</ion-select-option> -->
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step3.controls.regulator.hasError('required') && medical_form_step3.controls.regulator.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Date you received the letter</ion-label>
+        <ion-datetime placeholder="Select Date" class="input-box box" formControlName="date_received_notification"
+          displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step3.controls.date_received_notification.hasError('required') && medical_form_step3.controls.date_received_notification.touched">
+        <p class="content">Please Select Date!</p>
+      </ion-item>
+
+      <ion-label class="lbl-contact-blk add-margin">Attach Letter</ion-label>
+
+      <div class="div-docs add-margin">
+
+        <h3 *ngIf="attach_letter_image.length == 0" text-center>Please Select Image!</h3>
+
+        <ion-list class="doc-list">
+            <ion-item lines="none" class="doc-item" *ngFor="let img of attach_letter_image; index as pos" text-wrap>
+                <ion-thumbnail slot="start">
+                    <ion-img *ngIf="img.fileIcon" src="../../../assets/images/files.png"></ion-img>
+                    <ion-img *ngIf="!img.fileIcon" [src]="img.path"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    {{ img.name }}
+                </ion-label>
+                <ion-button slot="end" fill="clear" (click)="delete_attach_letter(img, pos)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ion-list>
+        
+        <div class="upload-btn-wrapper">
+          <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Letter</ion-button>
+          <input type="file" (change)="attach_letter($event)"
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+        </div>
+
+       
+      </div>
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Has the selected organisation asked you to respond?</ion-label>
+
+        <ion-radio-group formControlName="regulator_respond">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+      <div class="div-Y" *ngIf="this.medical_form_step3.get('regulator_respond').value == 'true'">
+
+        <ion-item lines="none" class="input-item">
+          <ion-label position="stacked" class="input-lbl">Date you are required to respond</ion-label>
+          <ion-datetime placeholder="Select Date" class="input-box box" formControlName="date_respond"
+            displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="medical_form_step3.controls.date_respond.hasError('required') && medical_form_step3.controls.date_respond.touched">
+          <p class="content">Please Select Date!</p>
+        </ion-item>
+
+        <div class="div-que add-margin">
+
+          <ion-label class="lbl-head">Have you already responded?</ion-label>
+
+          <ion-radio-group formControlName="already_respond">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+
+        <div class="div-Y" *ngIf="this.medical_form_step3.get('already_respond').value == 'true'">
+
+          <ion-label class="lbl-contact-blk add">Attach Letter</ion-label>
+
+          <div class="div-docs add-margin">
+
+            <h3 *ngIf="attach_have_you_letter_image.length == 0" text-center>Please Select Image!</h3>
+    
+            <ion-list class="doc-list">
+                <ion-item lines="none" class="doc-item" *ngFor="let img of attach_have_you_letter_image; index as pos" text-wrap>
+                    <ion-thumbnail slot="start">
+                        <ion-img *ngIf="img.fileIcon1" src="../../../assets/images/files.png"></ion-img>
+                        <ion-img *ngIf="!img.fileIcon1" [src]="img.path"></ion-img>
+                    </ion-thumbnail>
+                    <ion-label>
+                        {{ img.name }}
+                    </ion-label>
+                    <ion-button slot="end" fill="clear" (click)="delete_attach_have_you_letter(img, pos)">
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
+                </ion-item>
+            </ion-list>
+            <div class="upload-btn-wrapper">
+              <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Letter</ion-button>
+              <input type="file" (change)="attach_have_you_letter($event)"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </div>
+    
+         
+    
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="div-que add-margin">
+        <ion-label class="lbl-head">Do you require legal assistance for response?</ion-label>
+
+        <ion-radio-group formControlName="require_legal_assistance">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="medicalStep3Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

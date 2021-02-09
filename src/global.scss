@@ -1,0 +1,792 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 300;
+    font-style: normal;
+    src: url('src/assets/fonts/montserrat/Montserrat-Regular.otf');
+}
+
+//Bottom Sheet
+.action-sheet-title{
+    height: 100% !important;
+}
+
+// Toast Message
+.dark-trans{
+    --background:#333;
+    --color:#f2f2f2;
+    --button-color:#f2f2f2;
+    //--end: 0;
+    //--start: 0;
+    --border-radius: 0;
+}
+
+// Border Error
+ion-input.ng-invalid.ng-touched{
+    border: 0.5px solid #d44848;
+}
+// ion-checkbox.ng-invalid.ng-touched{
+//     border: 0.5px solid #d44848;
+// }
+ion-radio-group.ng-invalid.ng-touched{
+    ion-radio{
+    --color: #d44848;
+    }
+}
+ion-textarea.ng-invalid.ng-touched{
+    border: 0.5px solid #d44848;
+}
+ion-select.ng-invalid.ng-touched{
+    border: 0.5px solid #d44848;
+}
+ion-item.item-radio-checked{
+    color: #00aeef;
+}
+
+// Field Error
+.validator-error{
+    --background: transparent;
+    color: #d44848;
+    --min-height: 30px;
+
+    .content{
+        margin-bottom: 0px;
+        margin-top: 0px;
+        font-size: 12px;
+    }
+}
+
+// Menu Item
+.menu-container{
+    --background: #fff;
+
+    .menu-toggle{
+
+        .grey-background{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transform: rotate(71deg);
+            border: solid 1px #f1f1f1;
+            background-color: #f1f1f1;
+            z-index: 0;
+            bottom: 69%;
+            left: 18%;
+        }   
+
+        .card-profile{
+            margin: 0px; 
+            border-radius: 0px; 
+
+            .profile-pic{
+                width: 90%;
+                display: block;
+                text-align: center;
+                margin: auto;
+                margin-top: 5%;
+                margin-bottom: 5%;
+            }
+        }
+        .menu-item{
+            --background: #fff;
+            color: #383a3e;
+
+            .menu-item-icon{
+                margin-right: 5px;
+            }
+        }
+        .btn-logout{
+            font-weight: bold;
+            border: 1px solid #383a3e;
+            margin: 5px 16px;
+        }
+    }
+}
+
+// Page Claims
+.page-card{
+    --background: #f1f1f1;
+
+    .card-main{
+        background: #fff;
+        margin: 5px;
+        box-shadow: 0px 0px 0px 0px;
+        border-radius: 0px;
+
+        .row-card{
+            .col-head{
+                color: var(--ion-color-secondary);
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .col-value{
+                color: var(--ion-color-medium);
+            }
+        }
+        .btn-bottom-edit{
+            border: 1px solid;
+            font-weight: bold;
+        }
+    }
+}
+
+.doc-desc{
+    display: block;
+    font-size: 13px;
+    padding: 10px;
+    background: #f1f1f1;
+}
+
+// Page Documents
+.page-docs{
+    .doc-list{
+        margin: 0px;
+
+        .doc-item{
+            padding: 5px 0px;
+        }
+    }
+
+    .upload-btn-wrapper {
+        position: relative;
+        margin: 50px 25px 25px 25px;
+        padding: 5px;
+    }  
+    .btn{
+        border: 2px solid #383a3e;
+        font-weight: bold;
+        margin: 0px;
+
+        //margin: 0 auto;
+    }
+    .upload-btn-wrapper input[type=file] {
+        font-size: 43px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: 0 auto;
+        top: 0;
+        opacity: 0;
+    }
+}
+
+// Page Review
+.page-review{
+    .row-items{
+        border-bottom: 0.5px solid #f1f1f1;
+        
+        .col-items{
+            padding: 10px 5px 0px 0px;
+
+            .no{
+                background: #00aeef;
+                color: #fff;
+                font-size: 13px;
+                text-align: center;
+                margin: auto;
+                border-radius: 15px;
+                padding: 0px;
+                height: 30px;
+                width: 30px;
+                line-height: 30px;
+            }
+            .lbl-que{
+                font-size: 14px;
+                margin: 0px;
+                font-weight: normal;
+                color: #024f9a;
+            }
+            .lbl-ans{
+                margin: 8px 0px !important;
+                font-size: 14px;
+                color: #00aeef;
+            }
+        }
+    }
+}
+
+// Page Done
+.page-done{
+    .lbl-head{
+        display: block;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .lbl-desc{
+        display: block;
+        font-size: 16px;
+        //margin: 25px 0px;
+    }
+    .lbl-ref{
+        display: block;
+        font-size: 16px;
+        //text-align: center;
+        //text-decoration: underline;
+        margin: 25px 0px;
+    }
+    .lbl-que{
+        display: block;
+        font-size: 16px;
+    }
+    .icon{
+        font-size: 90px;
+    }
+}
+
+// Page Home
+.page-home{
+    
+    .img-head{
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        float: left;
+    }
+    .lbl-head{
+        font-weight: bold;
+        display: block;
+        background: #f1f1f1;
+        padding: 14px;
+        float: left;
+        margin-bottom: 5px;
+        width: 100%;
+    }
+    .row-card{
+        padding: 0px 5px 0px 5px;
+    
+        .col-card{
+            padding: 0px;
+    
+            .card-service{
+                margin: 5px;
+                height: 160px;
+                border-radius: 0px;
+                padding: 8px;
+                box-shadow: 0px 0px;
+    
+                .img-service{
+                    height: 100px;
+                    width: 100px;
+                    object-fit: cover;
+                    margin: 0 auto;      
+                    border-radius: 50%;
+                    padding: 15px;
+                    font-weight: bold;
+                    }    
+                .lbl-service{
+                    display: block;
+                    text-align: center;
+                    font-size: 14px;
+                    font-weight: bold;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
+
+// Extra Home CSS
+.home-img-clr{
+    border: 0 solid #024f9a;
+    background: linear-gradient(#0486ca,#024f9a);
+}
+.home-img{
+    border: 2px solid #00aeef;
+}
+
+// Header
+.head{
+    font-weight: bold;
+    padding-inline-start: 12%;
+    padding-inline-end: 12%;
+}
+
+//Dropdown OverFlow
+.drop-over{
+    overflow: visible !important;
+    text-overflow: unset !important;
+    white-space: pre-wrap !important;
+}
+
+//Label OverFlow
+.lbl-over{
+    white-space: pre-wrap !important;
+}
+
+// Label Blue
+.lbl-contact{
+    padding: 0px;
+    font-weight: bold;
+    display: block;
+    font-size: 16px;
+    color: #00aeef;
+}
+
+// Label Black
+.lbl-contact-blk{
+    padding: 0px;
+    font-weight: bold;
+    display: block;
+    font-size: 16px;
+    color: #000;
+}
+
+// Label Notes
+.lbl-note{
+    display: block;
+    font-size: 13px;
+    font-style: italic;
+    padding: 15px; //padding: 7px;
+    margin-top: 20px; //margin-bottom: 20px;
+    background: #f1f1f1;
+}
+
+// Label Logo
+.lbl-logo{
+    width: 90%;
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+// Label Radio Header
+.lbl-head-radio{
+    display: block;
+    padding: 0px 0px 16px 0px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+// Label head
+.lbl-head{
+    display: block;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+// Card Notes
+.card-note{
+    box-shadow: 0px 0px;
+    background: #f1f1f1;
+    border-radius: 0px;
+    padding: 8px;
+    font-size: 12px;
+    font-style: oblique;
+    margin: 32px 0px 32px 0px;
+}
+
+// Extra Space/Color Add/Less
+.box{
+    color: #00aeef;
+}
+.bg{
+    background: #f1f1f1;
+}
+.bg-top{
+    margin-top: 10px;
+}
+.add{
+    padding-top: 8px;
+}
+.less{
+    padding-bottom: 8px;
+}
+.add-margin{
+    margin-top: 15px;
+}
+.less-margin{
+    margin-bottom: 15px;
+}
+
+//SignIn / Profile
+.add-spc{
+    --background-activated: #fff;
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+
+    .add-check{
+        --checkmark-color: #fff;
+    }
+
+    .add-lbl{
+        font-size: 12px;
+    }
+}
+
+// Label Contacts Email/Phone
+.div-info{
+    padding: 16px;
+
+    .item-info{
+        --padding-start: 0px;
+    
+        .lbl-both{
+            display: block;
+            font-weight: bold;
+        }
+        .icons{
+            font-size: 22px;
+        }
+    }
+}
+
+// Info Contacts
+.info{
+    margin: 10px;
+    padding: 10px;
+    border-radius: 0px;
+    box-shadow: 0px 0px 4px #ccc;
+
+    .lbl-name{
+        display: block;
+        font-weight: bold;
+        padding: 5px 0px;
+        font-size: 16px;
+    }
+    .lbl-add1{
+        display: block;
+        padding: 5px 0px;
+        font-size: 14px;
+        color: #000;
+    }
+    .lbl-add2{
+        display: block;
+        padding: 5px 0px;
+        font-size: 14px;
+        color: #000;
+    }
+    .lbl-phn{
+        display: block;
+        padding: 5px 0px;
+        font-size: 14px;
+        color: #000;
+
+        .lbl-phn-value{
+            color: var(--ion-color-primary);
+        }
+    }
+    .lbl-fax{
+        display: block;
+        padding: 5px 0px;
+        font-size: 14px;
+        color: #000;
+
+        .lbl-fax-value{
+            color: var(--ion-color-primary);
+        }
+    }
+    .lbl-email{
+        display: block;
+        padding: 5px 0px;
+        font-size: 14px;
+        color: #000;
+
+        .lbl-email-value{
+            color: var(--ion-color-primary);
+        }
+    } 
+}
+
+// Input Field
+.input-item{
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+    --background-activated: transparent;
+    --background-focused: transparent;
+
+    .input-lbl{
+        font-weight: bold;
+    }
+    .input-box{
+        background: #f1f1f1;
+        --padding-start: 8px !important;
+    }
+    .icon{
+        position: absolute;
+        right: 10px;
+        font-size: 24px;
+        top: 36px;
+        z-index: 999;
+    }
+    .icon-eye{
+        position: absolute;
+        right: 10px;
+        color: grey;
+        font-size: 24px;
+        top: 30px;
+        z-index: 999;
+    }
+}
+
+// Dropdown
+.item-dropdown{
+    --padding-start: 0px; 
+    --inner-padding-end: 0px;
+    --background-activated: transparent;
+    --background-focused: transparent;
+ 
+    .lbl-dropdown{
+         font-size: 13px;
+         font-weight: bold;
+    }
+    .btn-select{
+        --padding-end: 16px;
+        --padding-start: 8px;
+        font-size: 13px;
+        color: #00aeef;
+    }
+}
+
+// Radio Button
+.div-que{
+        
+    .lbl-head{
+        font-size: 13px;
+        font-weight: bold;
+        display: block;
+    }
+    .items-radio{
+        display: inline-block;
+        --padding-start: 0px;
+        --background-activated: transparent;
+        --background-focused: transparent;
+                
+        .lbl-radio{
+            font-weight: bold;
+            font-size: 14px;
+        }
+    }
+}
+
+// Multiple Radio Button
+.items-radio{
+    display: inline-block;
+    --padding-start: 0px;
+    --inner-padding-end: 0px;
+
+    .lbl-radio{
+        font-weight: bold;
+        font-size: 16px;
+    }
+    .btn-radio{
+        margin-right: 5px;
+    }
+}
+
+// Upload Image View Container
+.row-card{
+    padding: 0px;
+
+    .col-card{
+        padding: 0px;
+
+        .card-upload{
+            margin: 10px;
+            height: 150px;
+            border-radius: 0px;
+
+            .btn-close{
+                position: absolute;
+                right: 0;
+                margin: 0px;
+                --padding-start: 0px;
+                --padding-end: 5px;
+                height: 30px;
+            }
+            .img-upload{
+                height: 125px;
+                object-fit: cover;
+            }
+            .lbl-filename{
+                display: block;
+                text-align: center;
+                font-size: 12px;
+                font-weight: bold;
+                padding: 5px;
+            }
+        }
+    }
+}
+
+// Attach Documents/Picture/Files
+.div-docs{
+    border: 1px dotted #000;
+
+    .error{
+        margin-bottom: 10px;
+        text-align: center;
+    
+        .text{
+            width: 100%;
+        }
+    }
+
+    .doc-list{
+        margin: 0px;
+
+        .doc-item{
+            padding: 5px 0px;
+        }
+    }
+
+    .upload-btn-wrapper {
+        margin: 25px 25px 10px 25px;
+        padding: 5px;
+        position: relative;
+    }  
+    .btn{
+        border: 2px solid #383a3e;
+        font-weight: bold;
+        margin: 0 auto;
+    }
+    .upload-btn-wrapper input[type=file] {
+        font-size: 43px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        margin: 0 auto;
+        opacity: 0;
+    }
+}
+
+// Video Section
+.row-video{
+    .col-video{
+        padding: 0px;
+
+        .btn-upload{
+            color: #fff;
+            font-weight: bold;
+            --color-activated: #fff;
+            margin: 0px;
+        }
+        .btn-reset{
+            color: #fff;
+            font-weight: bold;
+            --color-activated: #fff;
+            margin: 0px;
+        }
+    }
+}
+
+.div-no{
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 100%;
+    text-align: center;
+
+    .label-no{
+        display: block;
+        font-weight: bold;
+        font-size: 20px;
+        color: #000;
+    }
+}
+
+// Button Review
+.btn-review{
+    color: #fff;
+    font-weight: bold;
+    position: absolute;
+    bottom: 25px;
+    left: 40px;
+    right: 40px;
+    --color-activated: #fff;
+}
+
+// Full Bottom Button
+.btn-bottom{
+    margin: 0px;
+    color: #fff;
+    font-weight: bold;
+    --color-activated: #fff;
+}
+
+// Bottom Button, Label
+.btns-bottom{
+    margin: 15% 0% 10% 0%;
+
+    .lbl-signup{
+        display: block;
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+    }
+    .btn-signin{
+        width: 75%;
+        margin: auto;
+        margin-top: 30px;
+        color: #fff;
+        font-weight: bold;
+        --color-activated: #fff;
+    }
+}
+
+// Footer Buttons
+.border-R{
+    border-right: 1px solid #fff;
+}
+.border-L{
+    border-left: 1px solid #fff;
+}
+.btns-footer{
+    text-align: center;
+
+    .row-footer{
+
+        .col-footer{
+            padding: 0px;
+
+            .btn-back{
+                color: #fff;
+                font-weight: bold;
+                --color-activated: #fff;
+                --color-focused: #fff;
+                margin: 0px;
+                font-size: 15px;
+            }
+            .btn-next{
+                color: #fff;
+                font-weight: bold;
+                --color-activated: #fff;
+                --color-focused: #fff;
+                margin: 0px;
+                font-size: 15px;
+            }
+        }
+    }
+}

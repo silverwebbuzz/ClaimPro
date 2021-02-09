@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Weather Related</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="weather_related_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Weather Related Details</ion-label>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Type of damage</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="class_claim_sub"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Accidental Damage">Accidental Damage</ion-select-option>
+        <ion-select-option value="Personal Accident Injury or Illness">Personal Accident Injury or Illness</ion-select-option>
+        <ion-select-option value="Crime">Crime</ion-select-option>
+        <ion-select-option value="Earthquake">Earthquake</ion-select-option>
+        <ion-select-option value="Escape of Water">Escape of Water</ion-select-option>
+        <ion-select-option value="Financial Loss">Financial Loss</ion-select-option>
+        <ion-select-option value="Fire">Fire</ion-select-option>
+        <ion-select-option value="Impact">Impact</ion-select-option>
+        <ion-select-option value="Flood">Flood</ion-select-option>
+        <ion-select-option value="Motor Accident">Motor Accident</ion-select-option>
+        <ion-select-option value="Accidental Loss">Accidental Loss</ion-select-option>
+        <ion-select-option value="Mechanical/Electrical Failure">Mechanical/Electrical Failure</ion-select-option>
+        <ion-select-option value="Electronic Failure">Electronic Failure</ion-select-option>
+        <ion-select-option value="Weather">Weather</ion-select-option>
+        <ion-select-option value="Medical Malpractice">Medical Malpractice</ion-select-option>
+        <ion-select-option value="Professional Negligence">Professional Negligence</ion-select-option>
+        <ion-select-option value="Property damage">Property damage</ion-select-option>
+        <ion-select-option value="Vehicle damage">Vehicle damage</ion-select-option>
+        <ion-select-option value="Third Party Liability Property Loss/Damage">Third Party Liability Property Loss/Damage</ion-select-option>
+        <ion-select-option value="Third Party Liability Vehicle Damage">Third Party Liability Vehicle Damage</ion-select-option>
+        <ion-select-option value="Vehicle Windscreen/Glass">Vehicle Windscreen/Glass</ion-select-option>
+        <ion-select-option value="Management Liability">Management Liability</ion-select-option>
+        <ion-select-option value="Cyber">Cyber</ion-select-option>
+        <ion-select-option value="Third Party Liability Injury">Third Party Liability Injury</ion-select-option>
+        <ion-select-option value="Excess Reimbursement">Excess Reimbursement</ion-select-option>
+        <ion-select-option value="Firearm">Firearm</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="weather_related_form.controls.class_claim_sub.hasError('required') && weather_related_form.controls.class_claim_sub.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="weather_related_form.get('class_claim_sub').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="class_claim_sub_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="weather_related_form.controls.class_claim_sub_other.hasError('required') && weather_related_form.controls.class_claim_sub_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

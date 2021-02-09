@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Other</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="other_damage_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Other Details</ion-label>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Severity of damage</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="severity_damage"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Low">Low</ion-select-option>
+        <ion-select-option value="Medium">Medium</ion-select-option>
+        <ion-select-option value="High">High</ion-select-option>
+        <ion-select-option value="Critical">Critical</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="other_damage_form.controls.severity_damage.hasError('required') && other_damage_form.controls.severity_damage.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <ion-label class="lbl-contact-blk add-margin">Attach a list of items damaged</ion-label>
+
+    <div class="div-docs add-margin">
+
+      <ion-row class="row-card">
+        <ion-col size="6" class="col-card">
+          <ion-card class="card-upload">
+            <ion-button fill="clear" class="btn-close" (click)="delete()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+            <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+            <ion-label class="lbl-filename">FileName</ion-label>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <div class="upload-btn-wrapper">
+        <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+        <input type="file" (change)="fileUpload($event)"
+          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+      </div>
+
+      <!-- <ion-item no-padding lines="none" class="validator-error error"
+        *ngIf="other_damage_form.controls.myfile.hasError('required') && other_damage_form.controls.myfile.touched">
+        <p class="content text">Please Select Your Documents!</p>
+      </ion-item> -->
+
+    </div>
+
+    <ion-label class="lbl-contact-blk add-margin">Attach up to 6 images of damage</ion-label>
+
+    <div class="div-docs add-margin">
+
+      <ion-row class="row-card">
+        <ion-col size="6" class="col-card">
+          <ion-card class="card-upload">
+            <ion-button fill="clear" class="btn-close" (click)="delete()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+            <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+            <ion-label class="lbl-filename">FileName</ion-label>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <div class="upload-btn-wrapper">
+        <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+        <input type="file" (change)="fileUpload($event)"
+          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+      </div>
+
+      <!-- <ion-item no-padding lines="none" class="validator-error error"
+        *ngIf="other_damage_form.controls.myfile.hasError('required') && other_damage_form.controls.myfile.touched">
+        <p class="content text">Please Select Your Documents!</p>
+      </ion-item> -->
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

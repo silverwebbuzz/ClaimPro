@@ -1,0 +1,1074 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Collision</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="collision_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Collision Details</ion-label>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Do you have a video of accident?</ion-label>
+
+      <ion-radio-group formControlName="video_proof">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.collision_form.get('video_proof').value == 'true'">
+
+      <ion-label class="lbl-contact-blk add">Attach Video</ion-label>
+
+      <!-- <div class="div-docs add-margin">
+  
+                <ion-row class="row-card">
+                  <ion-col size="6" class="col-card">
+                    <ion-card class="card-upload">
+                      <ion-button fill="clear" class="btn-close" (click)="delete()">
+                        <ion-icon name="close"></ion-icon>
+                      </ion-button>
+                      <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                      <ion-label class="lbl-filename">FileName</ion-label>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+    
+                <div class="upload-btn-wrapper">
+  
+                  <ion-label class="lbl-note" color="primary">
+                      (.mp4,.3gp) Size limit- 100.00 MB
+                  </ion-label>
+                    
+                  <ion-button fill="clear" color="dark" expand="full" class="btn">Select File</ion-button>
+                  <input type="file" formControlName="myfile" (change)="fileUpload($event)"
+                    accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+                </div>
+    
+                <ion-item no-padding lines="none" class="validator-error error"
+                  *ngIf="collision_form.controls.myfile.hasError('required') && collision_form.controls.myfile.touched">
+                  <p class="content text">Please Select Your Video!</p>
+                </ion-item>
+  
+                <ion-row class="row-video">
+                  <ion-col class="col-video border-R">
+                    <ion-button expand="full" class="btn-upload">Upload</ion-button>
+                  </ion-col>
+                  <ion-col class="col-video border-L">
+                    <ion-button expand="full" class="btn-reset">Reset</ion-button>
+                  </ion-col>
+                </ion-row>
+                
+                </div> -->
+
+    </div>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">What did the collision involve?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="what_collision_involve"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="An animal">An animal</ion-select-option>
+        <ion-select-option value="An object/structure">An object/structure</ion-select-option>
+        <ion-select-option value="Another vehicle">Another vehicle</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="collision_form.controls.what_collision_involve.hasError('required') && collision_form.controls.what_collision_involve.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <div *ngIf="collision_form.get('what_collision_involve').value == 'An animal'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Type of animal</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="animal_type"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Wild Animal">Wild Animal</ion-select-option>
+          <ion-select-option value="Farm Animal">Farm Animal</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.animal_type.hasError('required') && collision_form.controls.animal_type.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="collision_form.get('animal_type').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="animal_type_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.animal_type_other.hasError('required') && collision_form.controls.animal_type_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Is the owner of the animal a third party?</ion-label>
+
+        <ion-radio-group formControlName="know_animal_owner">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </div>
+
+      <div class="div-Y" *ngIf="this.collision_form.get('know_animal_owner').value == 'true'">
+
+        <ion-label class="lbl-contact-blk add">Animal owner details</ion-label>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">First Name</ion-label>
+          <ion-input type="text" formControlName="tp_christian_animal_owner" color="primary" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.tp_christian_animal_owner.hasError('required') && collision_form.controls.tp_christian_animal_owner.touched">
+          <p class="content">Please Enter First Name!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Last Name</ion-label>
+          <ion-input type="text" formControlName="tp_name_animal_owner" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.tp_name_animal_owner.hasError('required') && collision_form.controls.tp_name_animal_owner.touched">
+          <p class="content">Please Enter Last Name!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Street</ion-label>
+          <ion-input type="text" formControlName="owner_street" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.owner_street.hasError('required') && collision_form.controls.owner_street.touched">
+          <p class="content">Please Enter Street!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+          <ion-input type="text" formControlName="owner_town" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.owner_town.hasError('required') && collision_form.controls.owner_town.touched">
+          <p class="content">Please Enter Town!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+          <ion-input type="number" formControlName="owner_postal_code" color="primary" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.owner_postal_code.hasError('required') && collision_form.controls.owner_postal_code.touched">
+          <p class="content">Please Enter Postcode!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">State</ion-label>
+          <ion-input type="text" formControlName="owner_state" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.owner_state.hasError('required') && collision_form.controls.owner_state.touched">
+          <p class="content">Please Enter State!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Email</ion-label>
+          <ion-input type="email" formControlName="owner_email" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.owner_email.hasError('required') && collision_form.controls.owner_email.touched">
+          <p class="content">Please Enter Email Address!</p>
+        </ion-item>
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.owner_email.hasError('pattern') && collision_form.controls.owner_email.touched">
+          <p class="content">Please Enter Valid Email Address!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Telephone</ion-label>
+          <ion-input type="number" formControlName="owner_telephone" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.owner_telephone.hasError('required') && collision_form.controls.owner_telephone.touched">
+          <p class="content">Please Enter Telephone!</p>
+        </ion-item>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="collision_form.get('what_collision_involve').value == 'An object/structure'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Type of object/structure</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="structure_type"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Building">Building</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.structure_type.hasError('required') && collision_form.controls.structure_type.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="collision_form.get('structure_type').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="structure_type_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.structure_type_other.hasError('required') && collision_form.controls.structure_type_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Damage to object/structure</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="structure_damage"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Minor">Minor</ion-select-option>
+          <ion-select-option value="Major">Major</ion-select-option>
+          <ion-select-option value="Nil">Nil</ion-select-option>
+          <ion-select-option value="I don’t know">I don’t know</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.structure_damage.hasError('required') && collision_form.controls.structure_damage.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Is the owner of the object/structure a third party?</ion-label>
+
+        <ion-radio-group formControlName="structure_know_owner">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </div>
+
+      <div class="div-Y" *ngIf="this.collision_form.get('structure_know_owner').value == 'true'">
+
+        <ion-label class="lbl-contact-blk add">Object/structure owner details</ion-label>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">First Name</ion-label>
+          <ion-input type="text" formControlName="tp_christian_object_owner" color="primary" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.tp_christian_object_owner.hasError('required') && collision_form.controls.tp_christian_object_owner.touched">
+          <p class="content">Please Enter First Name!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Last Name</ion-label>
+          <ion-input type="text" formControlName="tp_name_object_owner" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.tp_name_object_owner.hasError('required') && collision_form.controls.tp_name_object_owner.touched">
+          <p class="content">Please Enter Last Name!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Street</ion-label>
+          <ion-input type="text" formControlName="object_street" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.object_street.hasError('required') && collision_form.controls.object_street.touched">
+          <p class="content">Please Enter Street!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+          <ion-input type="text" formControlName="object_town" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.object_town.hasError('required') && collision_form.controls.object_town.touched">
+          <p class="content">Please Enter Town!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+          <ion-input type="number" formControlName="object_postal_code" color="primary" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.object_postal_code.hasError('required') && collision_form.controls.object_postal_code.touched">
+          <p class="content">Please Enter Postcode!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">State</ion-label>
+          <ion-input type="text" formControlName="object_state" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.object_state.hasError('required') && collision_form.controls.object_state.touched">
+          <p class="content">Please Enter State!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Email</ion-label>
+          <ion-input type="email" formControlName="object_email" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.object_email.hasError('required') && collision_form.controls.object_email.touched">
+          <p class="content">Please Enter Email Address!</p>
+        </ion-item>
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.object_email.hasError('pattern') && collision_form.controls.object_email.touched">
+          <p class="content">Please Enter Valid Email Address!</p>
+        </ion-item>
+
+      </div>
+
+    </div>
+
+    <div *ngIf="collision_form.get('what_collision_involve').value == 'Another vehicle'">
+
+      <ion-label class="lbl-contact-blk add-margin">Driver of the other vehicle</ion-label>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">First Name</ion-label>
+        <ion-input type="text" formControlName="tp_christian_other_driver" color="primary" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.tp_christian_other_driver.hasError('required') && collision_form.controls.tp_christian_other_driver.touched">
+        <p class="content">Please Enter First Name!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Last Name</ion-label>
+        <ion-input type="text" formControlName="tp_name_other_driver" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.tp_name_other_driver.hasError('required') && collision_form.controls.tp_name_other_driver.touched">
+        <p class="content">Please Enter Last Name!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Street</ion-label>
+        <ion-input type="text" formControlName="other_driver_street" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_driver_street.hasError('required') && collision_form.controls.other_driver_street.touched">
+        <p class="content">Please Enter Street!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+        <ion-input type="text" formControlName="other_driver_town" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_driver_town.hasError('required') && collision_form.controls.other_driver_town.touched">
+        <p class="content">Please Enter Town!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+        <ion-input type="number" formControlName="other_driver_postal_code" color="primary" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_driver_postal_code.hasError('required') && collision_form.controls.other_driver_postal_code.touched">
+        <p class="content">Please Enter Postcode!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">State</ion-label>
+        <ion-input type="text" formControlName="other_driver_state" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_driver_state.hasError('required') && collision_form.controls.other_driver_state.touched">
+        <p class="content">Please Enter State!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Email</ion-label>
+        <ion-input type="email" formControlName="other_driver_email" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_driver_email.hasError('required') && collision_form.controls.other_driver_email.touched">
+        <p class="content">Please Enter Email Address!</p>
+      </ion-item>
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_driver_email.hasError('pattern') && collision_form.controls.other_driver_email.touched">
+        <p class="content">Please Enter Valid Email Address!</p>
+      </ion-item>
+
+      <ion-label class="lbl-contact-blk add-margin">Other vehicle details</ion-label>
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Make of other vehicle</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="other_vehicle_make"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Make of other vehicle">Make of other vehicle</ion-select-option>
+          <ion-select-option value="Make of other vehicle1">Make of other vehicle1</ion-select-option>
+          <ion-select-option value="Make of other vehicle2">Make of other vehicle2</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_vehicle_make.hasError('required') && collision_form.controls.other_vehicle_make.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Registration number of other vehicle</ion-label>
+        <ion-input type="text" formControlName="other_vehicle_reg" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_vehicle_reg.hasError('required') && collision_form.controls.other_vehicle_reg.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Year of other vehicle</ion-label>
+        <ion-input type="text" formControlName="other_vehicle_year" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_vehicle_year.hasError('required') && collision_form.controls.other_vehicle_year.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Model of other vehicle</ion-label>
+        <ion-input type="text" formControlName="other_vehicle_model" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_vehicle_model.hasError('required') && collision_form.controls.other_vehicle_model.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Body type of other vehicle</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="other_vehicle_body"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Sedan">Sedan</ion-select-option>
+          <ion-select-option value="Hatch">Hatch</ion-select-option>
+          <ion-select-option value="Utility">Utility</ion-select-option>
+          <ion-select-option value="Wagon">Wagon</ion-select-option>
+          <ion-select-option value="Sports Car">Sports Car</ion-select-option>
+          <ion-select-option value="SUV">SUV</ion-select-option>
+          <ion-select-option value="Convertible">Convertible</ion-select-option>
+          <ion-select-option value="4 Wheel Drive">4 Wheel Drive</ion-select-option>
+          <ion-select-option value="Pick Up">Pick Up</ion-select-option>
+          <ion-select-option value="Bus">Bus</ion-select-option>
+          <ion-select-option value="Prime Mover">Prime Mover</ion-select-option>
+          <ion-select-option value="Semi Trailer">Semi Trailer</ion-select-option>
+          <ion-select-option value="Tray">Tray</ion-select-option>
+          <ion-select-option value="Truck">Truck</ion-select-option>
+          <ion-select-option value="Van">Van</ion-select-option>
+          <ion-select-option value="Trailer">Trailer</ion-select-option>
+          <ion-select-option value="Container Trailer">Container Trailer</ion-select-option>
+          <ion-select-option value="Box Trailer">Box Trailer</ion-select-option>
+          <ion-select-option value="Caravan">Caravan</ion-select-option>
+          <ion-select-option value="Campervan">Campervan</ion-select-option>
+          <ion-select-option value="Mobile Home">Mobile Home</ion-select-option>
+          <ion-select-option value="Crane">Crane</ion-select-option>
+          <ion-select-option value="Excavator">Excavator</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_vehicle_body.hasError('required') && collision_form.controls.other_vehicle_body.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="collision_form.get('other_vehicle_body').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="other_vehicle_body_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.other_vehicle_body_other.hasError('required') && collision_form.controls.other_vehicle_body_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Damage to other vehicle</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="other_vehicle_damage"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Minor">Minor</ion-select-option>
+          <ion-select-option value="Major">Major</ion-select-option>
+          <ion-select-option value="Nil">Nil</ion-select-option>
+          <ion-select-option value="I don’t know">I don’t know</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.other_vehicle_damage.hasError('required') && collision_form.controls.other_vehicle_damage.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">What happened?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option"
+          formControlName="collision_what_happened" class="btn-select bg" mode="md">
+          <ion-select-option value="Hit whilst stationary">Hit whilst stationary</ion-select-option>
+          <ion-select-option value="Hit whilst moving">Hit whilst moving</ion-select-option>
+          <ion-select-option value="Intersection collision">Intersection collision</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.collision_what_happened.hasError('required') && collision_form.controls.collision_what_happened.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="collision_form.get('collision_what_happened').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="collision_what_happened_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.collision_what_happened_other.hasError('required') && collision_form.controls.collision_what_happened_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Who was at fault?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="who_was_fault"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Myself">Myself</ion-select-option>
+          <ion-select-option value="Other Party">Other Party</ion-select-option>
+          <ion-select-option value="I don’t know">I don’t know</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.who_was_fault.hasError('required') && collision_form.controls.who_was_fault.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Has your vehicle suffered damage?</ion-label>
+
+      <ion-radio-group formControlName="vehicle_suffered_damage">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.collision_form.get('vehicle_suffered_damage').value == 'true'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Damage to your vehicle</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="vehicle_damaged"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Vehicle is drivable">Vehicle is drivable</ion-select-option>
+          <ion-select-option value="Vehicle is not drivable">Vehicle is not drivable</ion-select-option>
+          <ion-select-option value="Not known">Not known</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="collision_form.controls.vehicle_damaged.hasError('required') && collision_form.controls.vehicle_damaged.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <div *ngIf="collision_form.get('vehicle_damaged').value == 'Vehicle is drivable'">
+
+        <ion-label class="lbl-contact-blk add-margin">Image of damages</ion-label>
+
+        <div class="div-docs add-margin">
+
+          <ion-row class="row-card">
+            <ion-col size="6" class="col-card">
+              <ion-card class="card-upload">
+                <ion-button fill="clear" class="btn-close" (click)="delete()">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+                <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                <ion-label class="lbl-filename">FileName</ion-label>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+          <div class="upload-btn-wrapper">
+            <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+            <input type="file" (change)="fileUpload($event)"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+          </div>
+
+          <!-- <ion-item no-padding lines="none" class="validator-error error"
+            *ngIf="collision_form.controls.myfile.hasError('required') && collision_form.controls.myfile.touched">
+            <p class="content text">Please Select Your Documents!</p>
+          </ion-item> -->
+
+        </div>
+
+        <div class="div-que add-margin">
+
+          <ion-label class="lbl-head">Do you have a quote to repair the damage?</ion-label>
+
+          <ion-radio-group formControlName="quote_repair">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+        </div>
+
+        <div class="div-Y" *ngIf="this.collision_form.get('quote_repair').value == 'true'">
+
+          <ion-label class="lbl-contact-blk add">Attach quote</ion-label>
+
+          <div class="div-docs add-margin">
+
+            <ion-row class="row-card">
+              <ion-col size="6" class="col-card">
+                <ion-card class="card-upload">
+                  <ion-button fill="clear" class="btn-close" (click)="delete()">
+                    <ion-icon name="close"></ion-icon>
+                  </ion-button>
+                  <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                  <ion-label class="lbl-filename">FileName</ion-label>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <div class="upload-btn-wrapper">
+              <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+              <input type="file" (change)="fileUpload($event)"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </div>
+
+            <!-- <ion-item no-padding lines="none" class="validator-error error"
+              *ngIf="collision_form.controls.myfile.hasError('required') && collision_form.controls.myfile.touched">
+              <p class="content text">Please Select Your Documents!</p>
+            </ion-item> -->
+
+          </div>
+
+          <div class="div-que add-margin">
+
+            <ion-label class="lbl-head">Are you claiming reimbursement of any costs?</ion-label>
+
+            <ion-radio-group formControlName="costs_reimbursed">
+              <ion-item lines="none" class="items-radio">
+                <ion-label class="lbl-radio">Yes</ion-label>
+                <ion-radio slot="start" value="true" mode="md"></ion-radio>
+              </ion-item>
+              <ion-item lines="none" class="items-radio">
+                <ion-label class="lbl-radio">No</ion-label>
+                <ion-radio slot="start" value="false" mode="md"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+          </div>
+
+          <div class="div-Y" *ngIf="this.collision_form.get('costs_reimbursed').value == 'true'">
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Name of account</ion-label>
+              <ion-input type="text" formControlName="bank_account_name" color="primary" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.bank_account_name.hasError('required') && collision_form.controls.bank_account_name.touched">
+              <p class="content">Please Enter Name!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="item-dropdown add">
+              <ion-label position="stacked" class="lbl-dropdown">Bank</ion-label>
+              <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="name_bank"
+                class="btn-select bg" mode="md">
+                <ion-select-option value="CBA">CBA</ion-select-option>
+                <ion-select-option value="Bendigo">Bendigo</ion-select-option>
+                <ion-select-option value="WESTPAC">WESTPAC</ion-select-option>
+                <ion-select-option value="NAB">NAB</ion-select-option>
+                <ion-select-option value="ANZ">ANZ</ion-select-option>
+                <ion-select-option value="St George">St George</ion-select-option>
+                <ion-select-option value="HSBC">HSBC</ion-select-option>
+                <ion-select-option value="aa">aa</ion-select-option>
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.name_bank.hasError('required') && collision_form.controls.name_bank.touched">
+              <p class="content">Please Select Required Field!</p>
+            </ion-item>
+
+            <!-- Other -->
+            <div *ngIf="collision_form.get('name_bank').value == 'Other'">
+              <ion-item lines="none" class="input-item add">
+                <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+                <ion-input type="text" color="primary" formControlName="name_bank_other" class="input-box">
+                </ion-input>
+              </ion-item>
+
+              <ion-item no-padding lines="none" class="validator-error"
+                *ngIf="collision_form.controls.name_bank_other.hasError('required') && collision_form.controls.name_bank_other.touched">
+                <p class="content">Please Enter Required Field!</p>
+              </ion-item>
+            </div>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Branch</ion-label>
+              <ion-input type="text" formControlName="bank_branch" color="primary" class="input-box"></ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.bank_branch.hasError('required') && collision_form.controls.bank_branch.touched">
+              <p class="content">Please Enter Branch!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">BSB</ion-label>
+              <ion-input type="text" formControlName="bank_bsb" color="primary" class="input-box"></ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.bank_bsb.hasError('required') && collision_form.controls.bank_bsb.touched">
+              <p class="content">Please Enter BSB!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Account number</ion-label>
+              <ion-input type="text" formControlName="bank_account_number" color="primary" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.bank_account_number.hasError('required') && collision_form.controls.bank_account_number.touched">
+              <p class="content">Please Enter Account Number!</p>
+            </ion-item>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="collision_form.get('vehicle_damaged').value == 'Vehicle is not drivable'">
+
+        <ion-label class="lbl-contact-blk add-margin">Where is the vehicle?</ion-label>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Street</ion-label>
+          <ion-input type="text" formControlName="where_vehicle_street" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.where_vehicle_street.hasError('required') && collision_form.controls.where_vehicle_street.touched">
+          <p class="content">Please Enter Street!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+          <ion-input type="text" formControlName="where_vehicle_suburb" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.where_vehicle_suburb.hasError('required') && collision_form.controls.where_vehicle_suburb.touched">
+          <p class="content">Please Enter Town!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+          <ion-input type="number" formControlName="where_vehicle_post_code" color="primary" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="collision_form.controls.where_vehicle_post_code.hasError('required') && collision_form.controls.where_vehicle_post_code.touched">
+          <p class="content">Please Enter Postcode!</p>
+        </ion-item>
+
+        <ion-label class="lbl-contact-blk add-margin">Image of damages</ion-label>
+
+        <div class="div-docs add-margin">
+
+          <ion-row class="row-card">
+            <ion-col size="6" class="col-card">
+              <ion-card class="card-upload">
+                <ion-button fill="clear" class="btn-close" (click)="delete()">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+                <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                <ion-label class="lbl-filename">FileName</ion-label>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+          <div class="upload-btn-wrapper">
+            <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+            <input type="file" (change)="fileUpload($event)"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+          </div>
+
+          <!-- <ion-item no-padding lines="none" class="validator-error error"
+            *ngIf="collision_form.controls.myfile.hasError('required') && collision_form.controls.myfile.touched">
+            <p class="content text">Please Select Your Documents!</p>
+          </ion-item> -->
+
+        </div>
+
+        <div class="div-que add-margin">
+
+          <ion-label class="lbl-head">Do you have a quote to repair the damage?</ion-label>
+
+          <ion-radio-group formControlName="quote_repair">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+        </div>
+
+        <div class="div-Y" *ngIf="this.collision_form.get('quote_repair').value == 'true'">
+
+          <ion-label class="lbl-contact-blk add">Attach quote</ion-label>
+
+          <div class="div-docs add-margin">
+
+            <ion-row class="row-card">
+              <ion-col size="6" class="col-card">
+                <ion-card class="card-upload">
+                  <ion-button fill="clear" class="btn-close" (click)="delete()">
+                    <ion-icon name="close"></ion-icon>
+                  </ion-button>
+                  <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                  <ion-label class="lbl-filename">FileName</ion-label>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <div class="upload-btn-wrapper">
+              <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+              <input type="file" (change)="fileUpload($event)"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </div>
+
+            <!-- <ion-item no-padding lines="none" class="validator-error error"
+              *ngIf="collision_form.controls.myfile.hasError('required') && collision_form.controls.myfile.touched">
+              <p class="content text">Please Select Your Documents!</p>
+            </ion-item> -->
+
+          </div>
+
+          <div class="div-que add-margin">
+
+            <ion-label class="lbl-head">Are you claiming reimbursement of any costs?</ion-label>
+
+            <ion-radio-group formControlName="costs_reimbursed">
+              <ion-item lines="none" class="items-radio">
+                <ion-label class="lbl-radio">Yes</ion-label>
+                <ion-radio slot="start" value="true" mode="md"></ion-radio>
+              </ion-item>
+              <ion-item lines="none" class="items-radio">
+                <ion-label class="lbl-radio">No</ion-label>
+                <ion-radio slot="start" value="false" mode="md"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+          </div>
+
+          <div class="div-Y" *ngIf="this.collision_form.get('costs_reimbursed').value == 'true'">
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Name of account</ion-label>
+              <ion-input type="text" formControlName="bank_account_name" color="primary" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.bank_account_name.hasError('required') && collision_form.controls.bank_account_name.touched">
+              <p class="content">Please Enter Name!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="item-dropdown add">
+              <ion-label position="stacked" class="lbl-dropdown">Bank</ion-label>
+              <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="name_bank"
+                class="btn-select bg" mode="md">
+                <ion-select-option value="CBA">CBA</ion-select-option>
+                <ion-select-option value="Bendigo">Bendigo</ion-select-option>
+                <ion-select-option value="WESTPAC">WESTPAC</ion-select-option>
+                <ion-select-option value="NAB">NAB</ion-select-option>
+                <ion-select-option value="ANZ">ANZ</ion-select-option>
+                <ion-select-option value="St George">St George</ion-select-option>
+                <ion-select-option value="HSBC">HSBC</ion-select-option>
+                <ion-select-option value="aa">aa</ion-select-option>
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.name_bank.hasError('required') && collision_form.controls.name_bank.touched">
+              <p class="content">Please Select Required Field!</p>
+            </ion-item>
+
+            <!-- Other -->
+            <div *ngIf="collision_form.get('name_bank').value == 'Other'">
+              <ion-item lines="none" class="input-item add">
+                <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+                <ion-input type="text" color="primary" formControlName="name_bank_other" class="input-box">
+                </ion-input>
+              </ion-item>
+
+              <ion-item no-padding lines="none" class="validator-error"
+                *ngIf="collision_form.controls.name_bank_other.hasError('required') && collision_form.controls.name_bank_other.touched">
+                <p class="content">Please Enter Required Field!</p>
+              </ion-item>
+            </div>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Branch</ion-label>
+              <ion-input type="text" formControlName="bank_branch" color="primary" class="input-box"></ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.bank_branch.hasError('required') && collision_form.controls.bank_branch.touched">
+              <p class="content">Please Enter Branch!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">BSB</ion-label>
+              <ion-input type="text" formControlName="bank_bsb" color="primary" class="input-box"></ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.bank_bsb.hasError('required') && collision_form.controls.bank_bsb.touched">
+              <p class="content">Please Enter BSB!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Account number</ion-label>
+              <ion-input type="text" formControlName="bank_account_number" color="primary" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="collision_form.controls.bank_account_number.hasError('required') && collision_form.controls.bank_account_number.touched">
+              <p class="content">Please Enter Account Number!</p>
+            </ion-item>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

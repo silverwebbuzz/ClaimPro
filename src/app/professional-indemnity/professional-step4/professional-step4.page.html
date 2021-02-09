@@ -1,0 +1,231 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Incident details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="professional_form_step4" autocomplete="off">
+
+    <ion-label class="lbl-contact">Claimant details</ion-label>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">First Name</ion-label>
+      <ion-input type="text" formControlName="tp_christian_claimant" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_christian_claimant.hasError('required') && professional_form_step4.controls.tp_christian_claimant.touched">
+      <p class="content">Please Enter First Name!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Last Name</ion-label>
+      <ion-input type="text" formControlName="tp_name_claimant" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_name_claimant.hasError('required') && professional_form_step4.controls.tp_name_claimant.touched">
+      <p class="content">Please Enter Last Name!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Street</ion-label>
+      <ion-input type="text" formControlName="tp_postal_street" color="primary" class="input-box" id="tp_postal_street" (ionFocus)="tp_postalAddress()"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_postal_street.hasError('required') && professional_form_step4.controls.tp_postal_street.touched">
+      <p class="content">Please Enter Street!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+      <ion-input type="text" formControlName="tp_postal_suburb" color="primary" class="input-box" id="tp_postal_suburb"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_postal_suburb.hasError('required') && professional_form_step4.controls.tp_postal_suburb.touched">
+      <p class="content">Please Enter Town!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+      <ion-input type="number" formControlName="tp_postal_postcode" color="primary" class="input-box" id="tp_postal_postcode"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_postal_postcode.hasError('required') && professional_form_step4.controls.tp_postal_postcode.touched">
+      <p class="content">Please Enter Postcode!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">State</ion-label>
+      <ion-input type="text" formControlName="tp_postal_state" color="primary" class="input-box" id="tp_postal_state"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_postal_state.hasError('required') && professional_form_step4.controls.tp_postal_state.touched">
+      <p class="content">Please Enter State!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Email</ion-label>
+      <ion-input type="email" formControlName="tp_postal_email" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_postal_email.hasError('required') && professional_form_step4.controls.tp_postal_email.touched">
+      <p class="content">Email Address is required!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_postal_email.hasError('pattern') && professional_form_step4.controls.tp_postal_email.touched">
+      <p class="content">Please Enter a Valid Email Address!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Telephone</ion-label>
+      <ion-input type="number" formControlName="tp_tele_main" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.tp_tele_main.hasError('required') && professional_form_step4.controls.tp_tele_main.touched">
+      <p class="content">Please Enter Telephone!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl lbl-over">What was the nature of the contract with the claimant?</ion-label>
+      <ion-textarea rows="3" formControlName="business_contract" type="text" color="primary" class="input-box">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.business_contract.hasError('required') && professional_form_step4.controls.business_contract.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.business_contract.hasError('maxlength') && professional_form_step4.controls.business_contract.touched">
+      <p class="content">Allow Only 140 Characters!</p>
+    </ion-item>
+
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">What was the value of the contract?</ion-label>
+      <ion-input type="text" formControlName="contract_value" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.contract_value.hasError('required') && professional_form_step4.controls.contract_value.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Where did this occur?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="where_loss_damage" class="btn-select bg" mode="md" (ionChange)="occurchange($event.target.value)">
+            <ion-select-option *ngFor="let opt of where_loss_damage | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+          <!-- <ion-select-option value="Risk Address">Risk Address</ion-select-option>
+          <ion-select-option value="Another Location">Another Location</ion-select-option>
+          <ion-select-option value="In Transit">In Transit</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option> -->
+        </ion-select>
+      </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step4.controls.where_loss_damage.hasError('required') && professional_form_step4.controls.where_loss_damage.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Another Location, Risk Address -->
+    <div
+      *ngIf="professional_form_step4.get('where_loss_damage').value == '1343' || professional_form_step4.get('where_loss_damage').value == '1344'">
+      <ion-label class="lbl-contact add-margin">Address details</ion-label>
+
+  <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Street</ion-label>
+      <ion-input type="text" formControlName="risk_street" color="primary" class="input-box" id="address_line_1"></ion-input>
+    </ion-item>
+  
+    <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step4.controls.risk_street.hasError('required') && professional_form_step4.controls.risk_street.touched">
+        <p class="content">Please Enter Street!</p>
+      </ion-item>
+  
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+      <ion-input type="text" formControlName="risk_suburb" color="primary" class="input-box" id="city"></ion-input>
+    </ion-item>
+  
+    <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step4.controls.risk_suburb.hasError('required') && professional_form_step4.controls.risk_suburb.touched">
+        <p class="content">Please Enter Town!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">State</ion-label>
+          <ion-input type="text" formControlName="risk_state" color="primary" class="input-box" id="state"></ion-input>
+        </ion-item>
+      
+        <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="professional_form_step4.controls.risk_state.hasError('required') && professional_form_step4.controls.risk_state.touched">
+            <p class="content">Please Enter State!</p>
+          </ion-item>
+  
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+      <ion-input type="number" formControlName="risk_postcode" color="primary" class="input-box" id="postcode"></ion-input>
+    </ion-item>
+  
+    <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step4.controls.risk_postcode.hasError('required') && professional_form_step4.controls.risk_postcode.touched">
+        <p class="content">Please Enter Postcode!</p>
+      </ion-item>
+  
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Country</ion-label>
+      <ion-input type="text" formControlName="risk_country" color="primary" class="input-box" id="country"></ion-input>
+    </ion-item>
+  
+    <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step4.controls.risk_country.hasError('required') && professional_form_step4.controls.risk_country.touched">
+        <p class="content">Please Enter Country!</p>
+      </ion-item>
+
+    </div>
+
+    <!-- Other -->
+    <div *ngIf="professional_form_step4.get('where_loss_damage').value == '1346'">
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+        <ion-input type="text" color="primary" formControlName="where_loss_damage_other" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step4.controls.where_loss_damage_other.hasError('required') && professional_form_step4.controls.where_loss_damage_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="professionalStep4Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Earthquake</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="earthquake_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Earthquake Details</ion-label>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Does the ground on your property appear to have been damaged?</ion-label>
+
+      <ion-radio-group formControlName="earthquake_ground_damage">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">What appears to have been damaged?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="earthquake_damage"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Foundations of building">Foundations of building</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="earthquake_form.controls.earthquake_damage.hasError('required') && earthquake_form.controls.earthquake_damage.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="earthquake_form.get('earthquake_damage').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="earthquake_damage_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="earthquake_form.controls.earthquake_damage_other.hasError('required') && earthquake_form.controls.earthquake_damage_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

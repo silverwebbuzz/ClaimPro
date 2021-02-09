@@ -1,0 +1,311 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Incident details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="property_form_step2" autocomplete="off">
+
+    <ion-item lines="none" class="item-dropdown">
+      <ion-label position="stacked" class="lbl-dropdown">What does the loss or damage refer to?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="property"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Building/s">Building/s</ion-select-option>
+        <ion-select-option value="Contents">Contents</ion-select-option>
+        <ion-select-option value="Specified Items">Specified Items</ion-select-option>
+        <ion-select-option value="Jewellery">Jewellery</ion-select-option>
+        <ion-select-option value="Collection">Collection</ion-select-option>
+        <ion-select-option value="Stock">Stock</ion-select-option>
+        <ion-select-option value="Fixtures & Fittings">Fixtures & Fittings</ion-select-option>
+        <ion-select-option value="Raw Materials">Raw Materials</ion-select-option>
+        <ion-select-option value="Plant & Equipment">Plant & Equipment</ion-select-option>
+        <ion-select-option value="Customer Goods">Customer Goods</ion-select-option>
+        <ion-select-option value="Employee Goods">Employee Goods</ion-select-option>
+        <ion-select-option value="Tools">Tools</ion-select-option>
+        <ion-select-option value="Loss of Rent">Loss of Rent</ion-select-option>
+        <ion-select-option value="Profits">Profits</ion-select-option>
+        <ion-select-option value="Income">Income</ion-select-option>
+        <ion-select-option value="Extra Increased Cost of Working">Extra Increased Cost of Working</ion-select-option>
+        <ion-select-option value="Claims Preparartion">Claims Preparartion</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="property_form_step2.controls.property.hasError('required') && property_form_step2.controls.property.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="property_form_step2.get('property').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="property_other" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.property_other.hasError('required') && property_form_step2.controls.property_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Where did this occur?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="where_loss_damage"
+        class="btn-select bg" mode="md" (ionChange)="occurchange($event.target.value)">
+        <ion-select-option *ngFor="let opt of where_loss_damage | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+        <!-- <ion-select-option value="Risk Address">Risk Address</ion-select-option>
+        <ion-select-option value="Another Location">Another Location</ion-select-option>
+        <ion-select-option value="In Transit">In Transit</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option> -->
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="property_form_step2.controls.where_loss_damage.hasError('required') && property_form_step2.controls.where_loss_damage.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Another Location, Risk Address -->
+    <div
+      *ngIf="property_form_step2.get('where_loss_damage').value == '1343' || property_form_step2.get('where_loss_damage').value == '1344'">
+      <ion-label class="lbl-contact add-margin">Address details</ion-label>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Street</ion-label>
+        <ion-input type="text" formControlName="risk_street" color="primary" class="input-box" id="address_line_1"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.risk_street.hasError('required') && property_form_step2.controls.risk_street.touched">
+        <p class="content">Please Enter Street!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+        <ion-input type="text" formControlName="risk_suburb" color="primary" class="input-box" id="city"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.risk_suburb.hasError('required') && property_form_step2.controls.risk_suburb.touched">
+        <p class="content">Please Enter Town!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">State</ion-label>
+        <ion-input type="text" formControlName="risk_state" color="primary" class="input-box" id="state"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.risk_state.hasError('required') && property_form_step2.controls.risk_state.touched">
+        <p class="content">Please Enter State!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+        <ion-input type="number" formControlName="risk_postcode" color="primary" class="input-box" id="postcode"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.risk_postcode.hasError('required') && property_form_step2.controls.risk_postcode.touched">
+        <p class="content">Please Enter Postcode!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Country</ion-label>
+        <ion-input type="text" formControlName="risk_country" color="primary" class="input-box" id="country"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.risk_country.hasError('required') && property_form_step2.controls.risk_country.touched">
+        <p class="content">Please Enter Country!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Risk address type</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="risk_address_type"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="House">House</ion-select-option>
+          <ion-select-option value="Apartment">Apartment</ion-select-option>
+          <ion-select-option value="Flat">Flat</ion-select-option>
+          <ion-select-option value="Town-House">Town-House</ion-select-option>
+          <ion-select-option value="Office">Office</ion-select-option>
+          <ion-select-option value="Retail">Retail</ion-select-option>
+          <ion-select-option value="Factory">Factory</ion-select-option>
+          <ion-select-option value="Warehouse">Warehouse</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.risk_address_type.hasError('required') && property_form_step2.controls.risk_address_type.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="property_form_step2.get('risk_address_type').value == '1346'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="risk_address_type_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="property_form_step2.controls.risk_address_type_other.hasError('required') && property_form_step2.controls.risk_address_type_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+    </div>
+
+    <!-- Other -->
+    <div *ngIf="property_form_step2.get('where_loss_damage').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="where_loss_damage_other" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.where_loss_damage_other.hasError('required') && property_form_step2.controls.where_loss_damage_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">When did the loss/damage occur?</ion-label>
+      <ion-datetime placeholder="Select Date" class="input-box box" formControlName="date_loss"
+        displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="property_form_step2.controls.date_loss.hasError('required') && property_form_step2.controls.date_loss.touched">
+      <p class="content">Please Select Date!</p>
+    </ion-item>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Was the loss/damage caused by a natural disaster?</ion-label>
+
+      <ion-radio-group formControlName="cat_event">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.property_form_step2.get('cat_event').value == 'true'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Disaster type</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="disaster_type"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Earthquake">Earthquake</ion-select-option>
+          <ion-select-option value="Thunderstorm">Thunderstorm</ion-select-option>
+          <ion-select-option value="Cyclone">Cyclone</ion-select-option>
+          <ion-select-option value="Flood">Flood</ion-select-option>
+          <ion-select-option value="Blizzard">Blizzard</ion-select-option>
+          <ion-select-option value="Tsunami">Tsunami</ion-select-option>
+          <ion-select-option value="Volcano">Volcano</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.disaster_type.hasError('required') && property_form_step2.controls.disaster_type.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="property_form_step2.get('disaster_type').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="disaster_type_other" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="property_form_step2.controls.disaster_type_other.hasError('required') && property_form_step2.controls.disaster_type_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+    </div>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Who discovered the loss/damage?</ion-label>
+      <ion-input type="text" formControlName="reporter_name" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="property_form_step2.controls.reporter_name.hasError('required') && property_form_step2.controls.reporter_name.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">What is their relationship to the policyholder?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="who_discovered"
+        class="btn-select bg" mode="md">
+        <ion-select-option *ngFor="let opt of who_discovered | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+        <!-- <ion-select-option value="Policyholder">Policyholder</ion-select-option>
+        <ion-select-option value="Employee">Employee</ion-select-option>
+        <ion-select-option value="Policyholders family member">Policyholders family member</ion-select-option>
+        <ion-select-option value="Neighbour">Neighbour</ion-select-option>
+        <ion-select-option value="Police">Police</ion-select-option>
+        <ion-select-option value="Fire Brigade">Fire Brigade</ion-select-option>
+        <ion-select-option value="Third Party">Third Party</ion-select-option>
+        <ion-select-option value="Agent acting for Policyholder">Agent acting for Policyholder</ion-select-option>
+        <ion-select-option value="Tenant">Tenant</ion-select-option>
+        <ion-select-option value="Policyholders Manager">Policyholders Manager</ion-select-option>
+        <ion-select-option value="Claimant">Claimant</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option> -->
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="property_form_step2.controls.who_discovered.hasError('required') && property_form_step2.controls.who_discovered.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="property_form_step2.get('who_discovered').value == '1356'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="who_discovered_other" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step2.controls.who_discovered_other.hasError('required') && property_form_step2.controls.who_discovered_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="propertyStep2Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

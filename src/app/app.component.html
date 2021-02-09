@@ -1,0 +1,54 @@
+<ion-app>
+  <ion-menu class="menu-container">
+    <ion-menu-toggle class="menu-toggle">
+      <ion-card class="card-profile">
+        <img src="../assets/images/insurence-logo.png" class="profile-pic" />
+      </ion-card>
+      <ion-item lines="none" class="menu-item" (click)="gotoNewClaim()">
+        <ion-icon name="list-box" mode="md" class="menu-item-icon"></ion-icon>
+        New Claim
+      </ion-item>
+      <!-- <ion-item lines="none" class="menu-item" (click)="existingClaim()">
+        <ion-icon name="list-box" mode="ios" class="menu-item-icon"></ion-icon>
+        Existing Claim
+      </ion-item> -->
+      <ion-item lines="none" class="menu-item" (click)="myClaim()">
+        <ion-icon name="contact" mode="md" class="menu-item-icon"></ion-icon>
+        My Claims
+      </ion-item>
+      <ion-item lines="none" class="menu-item" (click)="myProfile()">
+        <ion-icon name="contact" mode="ios" class="menu-item-icon"></ion-icon>
+        My Profile
+      </ion-item>
+      <ion-item lines="none" class="menu-item">
+        <ion-icon name="hand" mode="md" class="menu-item-icon"></ion-icon>
+        Our Promise
+      </ion-item>
+      <ion-item lines="none" class="menu-item">
+        <ion-icon name="information-circle-outline" mode="md" class="menu-item-icon"></ion-icon>
+        About Us
+      </ion-item>
+      <ion-item lines="none" class="menu-item" (click)="contactUs()">
+        <ion-icon name="chatbubbles" mode="ios" class="menu-item-icon"></ion-icon>
+        Contact Us
+      </ion-item>
+      <ion-item lines="none" class="menu-item">
+        <ion-icon name="paper" mode="md" class="menu-item-icon"></ion-icon>
+        Privacy Policy
+      </ion-item>
+      <ion-item lines="none" class="menu-item">
+        <ion-icon name="filing" mode="ios" class="menu-item-icon"></ion-icon>
+        Terms & Conditions
+      </ion-item>
+      <ion-item lines="none" class="menu-item" (click)="logout()">
+        <ion-icon name="log-out" mode="md" class="menu-item-icon"></ion-icon>
+        Logout
+      </ion-item>
+      <!-- <ion-button (click)="logout()" fill="clear" expand="full" color="dark" class="btn-logout">
+        <ion-icon name="log-out" mode="md" slot="start"></ion-icon>
+        LOG OUT
+      </ion-button> -->
+    </ion-menu-toggle>
+  </ion-menu>
+  <ion-router-outlet main></ion-router-outlet>
+</ion-app>

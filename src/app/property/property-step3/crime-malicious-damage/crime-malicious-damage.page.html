@@ -1,0 +1,326 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Crime/Malicious damage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="crime_malicious_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Crime/Malicious damage Details</ion-label>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Does the building have an alarm?</ion-label>
+
+      <ion-radio-group formControlName="property_have_alarm">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.crime_malicious_form.get('property_have_alarm').value == 'true'">
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Was it monitored by a security company?</ion-label>
+
+        <ion-radio-group formControlName="monitored_security_company">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </div>
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Was the alarm armed at the time of the loss?</ion-label>
+
+        <ion-radio-group formControlName="alarm_armed_at_time_of_loss">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </div>
+
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Does the building have video surveillance?</ion-label>
+
+      <ion-radio-group formControlName="building_video_surveillance">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.crime_malicious_form.get('building_video_surveillance').value == 'true'">
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Is there video of the crime?</ion-label>
+
+        <ion-radio-group formControlName="video_proof">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </div>
+    </div>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">How did they enter the building?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="property_how_enter"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Through the locked door">Through the locked door</ion-select-option>
+        <ion-select-option value="Through the window">Through the window</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="crime_malicious_form.controls.property_how_enter.hasError('required') && crime_malicious_form.controls.property_how_enter.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="crime_malicious_form.get('property_how_enter').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="property_how_enter_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="crime_malicious_form.controls.property_how_enter_other.hasError('required') && crime_malicious_form.controls.property_how_enter_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-label class="lbl-contact-blk add-margin">Attach Supporting Documents</ion-label>
+
+    <div class="div-docs add-margin">
+
+      <ion-row class="row-card">
+        <ion-col size="6" class="col-card">
+          <ion-card class="card-upload">
+            <ion-button fill="clear" class="btn-close" (click)="delete()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+            <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+            <ion-label class="lbl-filename">FileName</ion-label>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <div class="upload-btn-wrapper">
+        <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+        <input type="file" formControlName="myfile" (change)="fileUpload($event)"
+          accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+      </div>
+
+      <ion-item no-padding lines="none" class="validator-error error"
+        *ngIf="crime_malicious_form.controls.myfile.hasError('required') && crime_malicious_form.controls.myfile.touched">
+        <p class="content text">Please Select Your Documents!</p>
+      </ion-item>
+
+    </div>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Where did they enter the building?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="property_where_enter"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Through the front">Through the front</ion-select-option>
+        <ion-select-option value="Through the back">Through the back</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="crime_malicious_form.controls.property_where_enter.hasError('required') && crime_malicious_form.controls.property_where_enter.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="crime_malicious_form.get('property_where_enter').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="property_where_enter_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="crime_malicious_form.controls.property_where_enter_other.hasError('required') && crime_malicious_form.controls.property_where_enter_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Why were they able to enter the building?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option"
+        formControlName="property_why_able_to_enter" class="btn-select bg" mode="md">
+        <ion-select-option value="Door was not locked">Door was not locked</ion-select-option>
+        <ion-select-option value="Window was not locked">Window was not locked</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="crime_malicious_form.controls.property_why_able_to_enter.hasError('required') && crime_malicious_form.controls.property_why_able_to_enter.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="crime_malicious_form.get('property_why_able_to_enter').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="property_why_able_to_enter_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="crime_malicious_form.controls.property_why_able_to_enter_other.hasError('required') && crime_malicious_form.controls.property_why_able_to_enter_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">How did the offender/s leave the building?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="property_offender_leave"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Point of entry ">Point of entry </ion-select-option>
+        <ion-select-option value="Forced open another door">Forced open another door</ion-select-option>
+        <ion-select-option value="Smashed a window">Smashed a window</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="crime_malicious_form.controls.property_offender_leave.hasError('required') && crime_malicious_form.controls.property_offender_leave.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="crime_malicious_form.get('property_offender_leave').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="property_offender_leave_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="crime_malicious_form.controls.property_offender_leave_other.hasError('required') && crime_malicious_form.controls.property_offender_leave_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Were goods stolen from anywhere other than inside the main building? </ion-label>
+
+      <ion-radio-group formControlName="good_stolen_outside">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.crime_malicious_form.get('good_stolen_outside').value == 'true'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Where from?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="goods_stolen_from"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Yard">Yard</ion-select-option>
+          <ion-select-option value="Garden">Garden</ion-select-option>
+          <ion-select-option value="Shed">Shed</ion-select-option>
+          <ion-select-option value="Garage">Garage</ion-select-option>
+          <ion-select-option value="Carpark">Carpark</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="crime_malicious_form.controls.goods_stolen_from.hasError('required') && crime_malicious_form.controls.goods_stolen_from.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="crime_malicious_form.get('goods_stolen_from').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="goods_stolen_from_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="crime_malicious_form.controls.goods_stolen_from_other.hasError('required') && crime_malicious_form.controls.goods_stolen_from_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

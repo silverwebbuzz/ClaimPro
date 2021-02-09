@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Accidental Damage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="accidental_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Accidental Damage Details</ion-label>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Type of resultant damage</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="resultant_damage"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Water Damage">Water Damage</ion-select-option>
+        <ion-select-option value="Fire">Fire</ion-select-option>
+        <ion-select-option value="Smoke">Smoke</ion-select-option>
+        <ion-select-option value="Dent">Dent</ion-select-option>
+        <ion-select-option value="Scratch">Scratch</ion-select-option>
+        <ion-select-option value="Broken">Broken</ion-select-option>
+        <ion-select-option value="Lost">Lost</ion-select-option>
+        <ion-select-option value="Burnt">Burnt</ion-select-option>
+        <ion-select-option value="Chipped">Chipped</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="accidental_form.controls.resultant_damage.hasError('required') && accidental_form.controls.resultant_damage.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="accidental_form.get('resultant_damage').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="resultant_damage_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="accidental_form.controls.resultant_damage_other.hasError('required') && accidental_form.controls.resultant_damage_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Other information</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="professional_form_step6" autocomplete="off">
+
+    <div class="div-que">
+      <ion-label class="lbl-head">Have you been subjected to previous complaints in the past 3 years?</ion-label>
+
+      <ion-radio-group formControlName="previous_claims">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.professional_form_step6.get('previous_claims').value == 'true'">
+
+      <ion-item lines="none" class="input-item">
+        <ion-label position="stacked" class="input-lbl">Date of previous complaint</ion-label>
+        <ion-datetime placeholder="Select Date" class="input-box box" formControlName="previous_claim_date"
+          displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step6.controls.previous_claim_date.hasError('required') && professional_form_step6.controls.previous_claim_date.touched">
+        <p class="content">Please Select Date!</p>
+      </ion-item>
+
+      <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Nature of previous complaint</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="previous_type_claim" class="btn-select bg" mode="md">
+          <ion-select-option value="Misconduct">Misconduct</ion-select-option>
+          <ion-select-option value="Patient Records">Patient Records</ion-select-option>
+          <ion-select-option value="Misleading Marketing">Misleading Marketing</ion-select-option>
+          <ion-select-option value="Boundary Transgression">Boundary Transgression</ion-select-option>
+          <ion-select-option value="Breach of Privacy">Breach of Privacy</ion-select-option>
+          <ion-select-option value="Negligence causing injury or damage">Negligence causing injury or damage
+          </ion-select-option>
+          <ion-select-option value="Negligent treatment causing injury or damage">Negligent treatment causing injury or
+            damage</ion-select-option>
+          <ion-select-option value="Negligent equipment causing injury or damage">Negligent equipment causing injury or
+            damage</ion-select-option>
+          <ion-select-option value="Negligent advice causing injury or damage">Negligent advice causing injury or damage
+          </ion-select-option>
+          <ion-select-option value="Coroners Inquiry">Coroners Inquiry</ion-select-option>
+          <ion-select-option value="Cyber">Cyber</ion-select-option>
+          <ion-select-option value="Defamation">Defamation</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step6.controls.previous_type_claim.hasError('required') && professional_form_step6.controls.previous_type_claim.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="professional_form_step6.get('previous_type_claim').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+          <ion-input type="text" color="primary" formControlName="previous_type_claim_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="professional_form_step6.controls.previous_type_claim_other.hasError('required') && professional_form_step6.controls.previous_type_claim_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Insurer</ion-label>
+        <ion-input type="text" formControlName="previous_insurer" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step6.controls.previous_insurer.hasError('required') && professional_form_step6.controls.previous_insurer.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="professionalStep6Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

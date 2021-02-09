@@ -1,0 +1,124 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Incident details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="other_form_step1" autocomplete="off">
+    <ion-item lines="none" class="item-dropdown">
+        <ion-label position="stacked" class="lbl-dropdown">How would you like to be contacted?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="preferred_communication" class="btn-select bg" mode="md">
+            <ion-select-option *ngFor="let opt of preferred_communication | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+          <!-- <ion-select-option value="Telephone">Telephone</ion-select-option>
+          <ion-select-option value="Email">Email</ion-select-option>
+          <ion-select-option value="SMS">SMS</ion-select-option>
+          <ion-select-option value="Letter">Letter</ion-select-option> -->
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="other_form_step1.controls.preferred_communication.hasError('required') && other_form_step1.controls.preferred_communication.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <ion-item class="item-dropdown add" lines="none">
+          <ion-label position="stacked" class="lbl-dropdown drop-over">Are you making a personal claim or business claim?</ion-label>
+          <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="type_entitiy" class="btn-select bg" mode="md">
+            <ng-container *ngFor="let opt of client_type | keyvalue">
+              <ion-select-option *ngIf="opt.key == '1001' || opt.key == '1002'" [value]="opt.key">{{opt.value}}</ion-select-option>
+            <!-- <ion-select-option value="Personal">Personal</ion-select-option>
+            <ion-select-option value="Commercial">Commercial</ion-select-option>
+            <ion-select-option value="Government">Government</ion-select-option>
+            <ion-select-option value="Association">Association</ion-select-option> -->
+          </ng-container>
+          </ion-select>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="other_form_step1.controls.type_entitiy.hasError('required') && other_form_step1.controls.type_entitiy.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+        <div *ngIf="other_form_step1.get('type_entitiy').value == '1002' ||  other_form_step1.get('type_entitiy').value == '1004' || other_form_step1.get('type_entitiy').value == '1003'">
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Business name</ion-label>
+          <ion-input type="text" formControlName="client_company" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="other_form_step1.controls.client_company.hasError('required') && other_form_step1.controls.client_company.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Trading name</ion-label>
+          <ion-input type="text" formControlName="trading_name" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="other_form_step1.controls.trading_name.hasError('required') && other_form_step1.controls.trading_name.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">ABN</ion-label>
+          <ion-input type="text" formControlName="abn_client" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="other_form_step1.controls.abn_client.hasError('required') && other_form_step1.controls.abn_client.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">ITC%</ion-label>
+          <ion-input type="text" formControlName="itc_client" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="other_form_step1.controls.itc_client.hasError('required') && other_form_step1.controls.itc_client.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+
+    </div>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">What does the loss or damage refer to?</ion-label>
+          <ion-textarea rows="3" formControlName="reported_loss" type="text" color="primary" class="input-box"></ion-textarea>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="other_form_step1.controls.reported_loss.hasError('required') && other_form_step1.controls.reported_loss.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="other_form_step1.controls.reported_loss.hasError('maxlength') && other_form_step1.controls.reported_loss.touched">
+          <p class="content">Allow Only 400 Characters!</p>
+        </ion-item>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" size="large" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" size="large" class="btn-next" (click)="otherStep1Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

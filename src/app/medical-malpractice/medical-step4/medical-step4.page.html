@@ -1,0 +1,472 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Incident details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="medical_form_step4" autocomplete="off">
+  
+    <div class="div-que">
+      <ion-label class="lbl-head">Has a patient made a complaint of injury/damage?</ion-label>
+  
+      <ion-radio-group formControlName="patient_complaint">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-Y" *ngIf="this.medical_form_step4.get('patient_complaint').value == 'true'">
+    
+      <ion-item lines="none" class="input-item">
+        <ion-label position="stacked" class="input-lbl">Date you were notified of the complaint</ion-label>
+        <ion-datetime placeholder="Select Date" class="input-box box" formControlName="loss_date_discovery"
+          displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+      </ion-item>
+    
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.loss_date_discovery.hasError('required') && medical_form_step4.controls.loss_date_discovery.touched">
+        <p class="content">Please Select Date!</p>
+      </ion-item>
+    
+      <div class="div-que add-margin">
+        <ion-label class="lbl-head">Is the complaint in writing?</ion-label>
+    
+        <ion-radio-group formControlName="complaint_writing">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+    
+      <div class="div-Y" *ngIf="this.medical_form_step4.get('complaint_writing').value == 'true'">
+    
+        <ion-label class="lbl-contact-blk add less-margin">Attach all documents</ion-label>
+    
+        <div class="div-docs">
+    
+          <h3 *ngIf="complaint_documents_image.length == 0" text-center>Please Select Image!</h3>
+    
+          <ion-list class="doc-list">
+            <ion-item lines="none" class="doc-item" *ngFor="let img of complaint_documents_image; index as pos" text-wrap>
+              <ion-thumbnail slot="start">
+                <ion-img *ngIf="img.fileIcon2" src="../../../assets/images/files.png"></ion-img>
+                <ion-img *ngIf="!img.fileIcon2" [src]="img.path"></ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                {{ img.name }}
+              </ion-label>
+              <ion-button slot="end" fill="clear" (click)="delete_complaint_documents(img, pos)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-list>
+          <div class="upload-btn-wrapper">
+            <ion-button fill="clear" color="dark" expand="full" class="btn">Attach all documents</ion-button>
+            <input type="file" (change)="complaint_documents($event)"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+          </div>
+    
+    
+        </div>
+    
+        <ion-label class="lbl-contact add-margin">Complainant details</ion-label>
+    
+      </div>
+    
+    </div>
+
+    <ion-label class="lbl-contact add-margin"  *ngIf="this.medical_form_step4.get('complaint_writing').value != 'true'">Patient details</ion-label>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">First Name</ion-label>
+      <ion-input type="text" formControlName="tp_christian_patient" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.tp_christian_patient.hasError('required') && medical_form_step4.controls.tp_christian_patient.touched">
+      <p class="content">Please Enter First Name!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Last Name</ion-label>
+      <ion-input type="text" formControlName="tp_name_patient" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.tp_name_patient.hasError('required') && medical_form_step4.controls.tp_name_patient.touched">
+      <p class="content">Please Enter Last Name!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Street</ion-label>
+      <ion-input type="text" formControlName="patient_street" color="primary" class="input-box" id="patient_street" (ionFocus)="patientAddress()"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.patient_street.hasError('required') && medical_form_step4.controls.patient_street.touched">
+      <p class="content">Please Enter Street!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+      <ion-input type="text" formControlName="patient_suburb_town" color="primary" class="input-box"  id="patient_suburb_town"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.patient_suburb_town.hasError('required') && medical_form_step4.controls.patient_suburb_town.touched">
+      <p class="content">Please Enter Town!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+      <ion-input type="number" formControlName="patient_post_code" color="primary" class="input-box" id="patient_post_code"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.patient_post_code.hasError('required') && medical_form_step4.controls.patient_post_code.touched">
+      <p class="content">Please Enter Postcode!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">State</ion-label>
+      <ion-input type="text" formControlName="patient_state" color="primary" class="input-box" id="patient_state"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.patient_state.hasError('required') && medical_form_step4.controls.patient_state.touched">
+      <p class="content">Please Enter State!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Email</ion-label>
+      <ion-input type="email" formControlName="patient_email" color="primary" class="input-box" id="patient_email"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.patient_email.hasError('required') && medical_form_step4.controls.patient_email.touched">
+      <p class="content">Email Address is required!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.patient_email.hasError('pattern') && medical_form_step4.controls.patient_email.touched">
+      <p class="content">Please Enter a Valid Email Address!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Telephone</ion-label>
+      <ion-input type="number" formControlName="patient_telephone" color="primary" class="input-box" id="patient_telephone"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.patient_telephone.hasError('required') && medical_form_step4.controls.patient_telephone.touched">
+      <p class="content">Please Enter Telephone!</p>
+    </ion-item>
+
+    <div class="div-Y" *ngIf="this.medical_form_step4.get('patient_complaint').value == 'true'">
+    
+      <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Age of patient</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="age_patient" class="btn-select bg" mode="md">
+          <ion-select-option value="Under 18">Under 18</ion-select-option>
+          <ion-select-option value="18-25">18-25</ion-select-option>
+          <ion-select-option value="26-40">26-40</ion-select-option>
+          <ion-select-option value="41-50">41-50</ion-select-option>
+          <ion-select-option value="51-60">51-60</ion-select-option>
+          <ion-select-option value="Over 60">Over 60</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.age_patient.hasError('required') && medical_form_step4.controls.age_patient.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Where did you treat the patient?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="where_incident" class="btn-select bg" mode="md">
+            <ion-select-option *ngFor="let opt of where_incident | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+          <!-- <ion-select-option value="Private Practice">Private Practice</ion-select-option>
+          <ion-select-option value="Patients Home">Patients Home</ion-select-option>
+          <ion-select-option value="Hospital">Hospital</ion-select-option>
+          <ion-select-option value="Rehabilitation Care Facility">Rehabilitation Care Facility</ion-select-option>
+          <ion-select-option value="Sporting Club/Ground">Sporting Club/Ground</ion-select-option>
+          <ion-select-option value="Gymnasium">Gymnasium</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option> -->
+        </ion-select>
+      </ion-item>
+      
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.where_incident.hasError('required') && medical_form_step4.controls.where_incident.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+      
+      <!-- Other -->
+      <div *ngIf="medical_form_step4.get('where_incident').value == '1900'">
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+          <ion-input type="text" color="primary" formControlName="where_incident_other" class="input-box">
+          </ion-input>
+        </ion-item>
+      
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="medical_form_step4.controls.where_incident_other.hasError('required') && medical_form_step4.controls.where_incident_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">How long have you treated the patient?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="treatment_period" class="btn-select bg" mode="md">
+          <ion-select-option value="Less that 5 years">Less that 5 years</ion-select-option>
+          <ion-select-option value="Over 5 years">Over 5 years</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.treatment_period.hasError('required') && medical_form_step4.controls.treatment_period.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+      
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl lbl-over">What type of condition did the patient present with?</ion-label>
+        <ion-textarea rows="3" formControlName="patient_condition" type="text" color="primary" class="input-box">
+        </ion-textarea>
+      </ion-item>
+      
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.patient_condition.hasError('required') && medical_form_step4.controls.patient_condition.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+      <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="medical_form_step4.controls.patient_condition.hasError('maxlength') && medical_form_step4.controls.patient_condition.touched">
+          <p class="content">Allow Only 140 Characters!</p>
+        </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">What was your treatment?</ion-label>
+        <ion-input type="text" formControlName="what_treatment" color="primary" class="input-box"></ion-input>
+      </ion-item>
+      
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.what_treatment.hasError('required') && medical_form_step4.controls.what_treatment.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+      
+      <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Type of patient</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="type_patient" class="btn-select bg" mode="md">
+            <ion-select-option *ngFor="let opt of type_patient | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+          <!-- <ion-select-option value="Workcover">Workcover</ion-select-option>
+          <ion-select-option value="Motor Accident">Motor Accident</ion-select-option>
+          <ion-select-option value="Seeking prevantive treatment">Seeking prevantive treatment</ion-select-option>
+          <ion-select-option value="Reovering from surgery">Reovering from surgery</ion-select-option>
+          <ion-select-option value="Recovering from sports injury">Recovering from sports injury</ion-select-option>
+          <ion-select-option value="Rehabilitation patient">Rehabilitation patient</ion-select-option>
+          <ion-select-option value="Private">Private</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option> -->
+        </ion-select>
+      </ion-item>
+      
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.type_patient.hasError('required') && medical_form_step4.controls.type_patient.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+      
+      <!-- Other -->
+      <div *ngIf="medical_form_step4.get('type_patient').value == '1935'">
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+          <ion-input type="text" color="primary" formControlName="type_patient_other" class="input-box">
+          </ion-input>
+        </ion-item>
+      
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="medical_form_step4.controls.type_patient_other.hasError('required') && medical_form_step4.controls.type_patient_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+      
+      <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Sex of patient</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="sex_patient" class="btn-select bg" mode="md">
+          <ion-select-option value="Male">Male</ion-select-option>
+          <ion-select-option value="Female">Female</ion-select-option>
+          <ion-select-option value="Transgender">Transgender</ion-select-option>
+          <ion-select-option value="Did Not Say">Did Not Say</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.sex_patient.hasError('required') && medical_form_step4.controls.sex_patient.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+  
+          <!-- Other -->
+      <div *ngIf="medical_form_step4.get('sex_patient').value == 'Other'">
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+            <ion-input type="text" color="primary" formControlName="sex_patient_other" class="input-box">
+            </ion-input>
+          </ion-item>
+    
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="medical_form_step4.controls.sex_patient_other.hasError('required') && medical_form_step4.controls.sex_patient_other.touched">
+            <p class="content">Please Enter Required Field!</p>
+          </ion-item>
+        </div>
+
+    </div>
+
+    <ion-item class="item-dropdown add" lines="none">
+      <ion-label position="stacked" class="lbl-dropdown">What is the nature of the complaint?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="medical_malpractice" class="btn-select bg" mode="md">
+        <!-- <ion-select-option *ngFor="let opt of medical_malpractice | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option> -->
+        <ion-select-option value="2271">Inquiry - Patient Records</ion-select-option>
+        <ion-select-option value="1632">Inquiry - Professional misconduct
+        </ion-select-option>
+        <ion-select-option value="1634">Inquiry - Misleading Marketing</ion-select-option>
+        <ion-select-option value="1633">Inquiry - Boundary transgression</ion-select-option>
+        <ion-select-option value="1635">Inquiry - Breach of Privacy</ion-select-option>
+        <ion-select-option value="2215">Inquiry - Clinic Records / Accounts
+        </ion-select-option>
+        <ion-select-option value="2059">Occupiers neglience causing injury or damage</ion-select-option>
+        <ion-select-option value="1631">Negligent treatment causing injury/damage</ion-select-option>
+        <ion-select-option value="1697">Negligent equipment causing injury or damage</ion-select-option>
+        <ion-select-option value="2053">Negligent advice causing damage to property</ion-select-option>
+        <ion-select-option value="2277">Coroners Inquiry</ion-select-option>
+        <ion-select-option value="2057">Cyber</ion-select-option>
+        <ion-select-option value="2055">Defamation</ion-select-option>
+        <ion-select-option value="1636">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.medical_malpractice.hasError('required') && medical_form_step4.controls.medical_malpractice.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="medical_form_step4.get('medical_malpractice').value == '1636'">
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+        <ion-input type="text" color="primary" formControlName="medical_malpractice_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="medical_form_step4.controls.medical_malpractice_other.hasError('required') && medical_form_step4.controls.medical_malpractice_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl lbl-over">Briefly outline the allegations against you</ion-label>
+      <ion-textarea rows="3" formControlName="reported_circumstances" type="text" color="primary" class="input-box">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="medical_form_step4.controls.reported_circumstances.hasError('required') && medical_form_step4.controls.reported_circumstances.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="medical_form_step4.controls.reported_circumstances.hasError('maxlength') && medical_form_step4.controls.reported_circumstances.touched">
+          <p class="content">Allow Only 280 Characters!</p>
+        </ion-item>
+
+    <div class="div-que add-margin">
+      <ion-label class="lbl-head">Is the inquiry related to a relationship with a patient?</ion-label>
+
+      <ion-radio-group formControlName="relationship_patient">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-que add">
+      <ion-label class="lbl-head">Is the inquiry related to a dishonest or criminal act?</ion-label>
+
+      <ion-radio-group formControlName="related_criminal">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-que add">
+      <ion-label class="lbl-head">Is the inquiry related to alcohol or substance abuse?</ion-label>
+
+      <ion-radio-group formControlName="alcohol_substance">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-que add">
+      <ion-label class="lbl-head">Is the inquiry related to the care or treatment of a patient?</ion-label>
+
+      <ion-radio-group formControlName="care_treatment_patient">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="medicalStep4Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

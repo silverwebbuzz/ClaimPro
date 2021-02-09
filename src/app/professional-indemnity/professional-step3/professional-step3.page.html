@@ -1,0 +1,409 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Incident details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="professional_form_step3" autocomplete="off">
+
+    <div class="div-que">
+      <ion-label class="lbl-head">Has a regulator informed you about an inquiry into your services?</ion-label>
+
+      <ion-radio-group formControlName="regulator_inform">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-Y" *ngIf="this.professional_form_step3.get('regulator_inform').value == 'true'">
+
+      <ion-item class="item-dropdown" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Which organisation or regulator?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="regulator" class="btn-select bg" mode="md">
+            <ion-select-option *ngFor="let opt of regulator | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+          <!-- <ion-select-option value="AHPRA">AHPRA</ion-select-option>
+          <ion-select-option value="HCCC">HCCC</ion-select-option>
+          <ion-select-option value="OHO">OHO</ion-select-option> -->
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step3.controls.regulator.hasError('required') && professional_form_step3.controls.regulator.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Date you received the notification?</ion-label>
+        <ion-datetime placeholder="Select Date" class="input-box box" formControlName="date_received_notification"
+          displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step3.controls.date_received_notification.hasError('required') && professional_form_step3.controls.date_received_notification.touched">
+        <p class="content">Please Select Date!</p>
+      </ion-item>
+
+      <div class="div-docs add-margin">
+
+        <h3 *ngIf="attach_letter_image.length == 0" text-center>Please Select Image!</h3>
+
+        <ion-list class="doc-list">
+            <ion-item lines="none" class="doc-item" *ngFor="let img of attach_letter_image; index as pos" text-wrap>
+                <ion-thumbnail slot="start">
+                    <ion-img *ngIf="img.fileIcon" src="../../../assets/images/files.png"></ion-img>
+                    <ion-img *ngIf="!img.fileIcon" [src]="img.path"></ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    {{ img.name }}
+                </ion-label>
+                <ion-button slot="end" fill="clear" (click)="delete_attach_letter(img, pos)">
+                    <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ion-list>
+        <div class="upload-btn-wrapper">
+          <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Letter</ion-button>
+          <input type="file" (change)="attach_letter($event)"
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+        </div>
+
+       
+      </div>
+
+      <div class="div-que add-margin">
+        <ion-label class="lbl-head">Has the regulator asked you to respond?</ion-label>
+        <ion-radio-group formControlName="regulator_respond">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+      <div class="div-Y" *ngIf="this.professional_form_step3.get('regulator_respond').value == 'true'">
+
+        <ion-item lines="none" class="input-item">
+          <ion-label position="stacked" class="input-lbl">Date you are required to respond</ion-label>
+          <ion-datetime placeholder="Select Date" class="input-box box" formControlName="date_respond"
+            displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="professional_form_step3.controls.date_respond.hasError('required') && professional_form_step3.controls.date_respond.touched">
+          <p class="content">Please Select Date!</p>
+        </ion-item>
+
+        <div class="div-que add-margin">
+          <ion-label class="lbl-head">Have you already responded?</ion-label>
+
+          <ion-radio-group formControlName="already_respond">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+
+        <div class="div-Y" *ngIf="this.professional_form_step3.get('already_respond').value == 'true'">
+
+          <div class="div-docs add-margin">
+
+            <h3 *ngIf="attach_have_you_letter_image.length == 0" text-center>Please Select Image!</h3>
+    
+            <ion-list>
+                <ion-item *ngFor="let img of attach_have_you_letter_image; index as pos" text-wrap>
+                    <ion-thumbnail slot="start">
+                        <ion-img *ngIf="img.fileIcon1" src="../../../assets/images/files.png"></ion-img>
+                        <ion-img *ngIf="!img.fileIcon1" [src]="img.path"></ion-img>
+                    </ion-thumbnail>
+                    <ion-label>
+                        {{ img.name }}
+                    </ion-label>
+                    <ion-button slot="end" fill="clear" (click)="delete_attach_have_you_letter(img, pos)">
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
+                </ion-item>
+            </ion-list>
+            <div class="upload-btn-wrapper">
+              <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Letter</ion-button>
+              <input type="file" (change)="attach_have_you_letter($event)"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </div>     
+    
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- <div class="div-N" *ngIf="this.professional_form_step3.get('regulator_respond').value == 'false'"> -->
+
+        <div class="div-que add">
+          <ion-label class="lbl-head">Do you require legal assistance for response?</ion-label>
+
+          <ion-radio-group formControlName="require_legal_assistance">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+
+      <!-- </div> -->
+
+    </div>
+
+    <ion-item class="item-dropdown add" lines="none">
+      <ion-label position="stacked" class="lbl-dropdown">What is the nature of the complaint?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="professional_negligence" class="btn-select bg" mode="md">
+          <!-- <ion-select-option *ngFor="let opt of professional_negligence | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option> -->
+        <ion-select-option value="2208">Professional Misconduct</ion-select-option>
+        <ion-select-option value="1626">Negligent advice</ion-select-option>
+        <ion-select-option value="1627">Directors liability</ion-select-option>
+        <ion-select-option value="1628">Defamation/Slander</ion-select-option>
+        <ion-select-option value="1696">Design Error</ion-select-option>
+        <ion-select-option value="1629">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step3.controls.professional_negligence.hasError('required') && professional_form_step3.controls.professional_negligence.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="professional_form_step3.get('professional_negligence').value == '1629'">
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+        <ion-input type="text" color="primary" formControlName="professional_negligence_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step3.controls.professional_negligence_other.hasError('required') && professional_form_step3.controls.professional_negligence_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl lbl-over">Briefly outline the allegations against you</ion-label>
+      <ion-textarea rows="3" formControlName="reported_circumstances" type="text" color="primary" class="input-box">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step3.controls.reported_circumstances.hasError('required') && professional_form_step3.controls.reported_circumstances.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="professional_form_step3.controls.reported_circumstances.hasError('maxlength') && professional_form_step3.controls.reported_circumstances.touched">
+          <p class="content">Allow Only 280 Characters!</p>
+        </ion-item>
+
+
+    <div class="div-que add-margin">
+      <ion-label class="lbl-head">Is the inquiry related to a relationship with a patient?</ion-label>
+
+      <ion-radio-group formControlName="relationship_patient">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-que add">
+      <ion-label class="lbl-head">Is the inquiry related to a dishonest or criminal act?</ion-label>
+
+      <ion-radio-group formControlName="related_criminal">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-que add">
+      <ion-label class="lbl-head">Is the inquiry related to alcohol or substance abuse?</ion-label>
+
+      <ion-radio-group formControlName="alcohol_substance">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-que add">
+      <ion-label class="lbl-head">Is the inquiry related to the care or treatment of a patient?</ion-label>
+
+      <ion-radio-group formControlName="care_treatment_patient">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-que add">
+      <ion-label class="lbl-head">Does this notification refer to a breach of professional duty or any law?</ion-label>
+
+      <ion-radio-group formControlName="breach_professional_duty">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-Y" *ngIf="this.professional_form_step3.get('breach_professional_duty').value == 'true'">
+    
+      <ion-item lines="none" class="input-item">
+        <ion-label position="stacked" class="input-lbl">Date you were notified of the complaint</ion-label>
+        <ion-datetime placeholder="Select Date" class="input-box box" formControlName="loss_date_discovery"
+          displayFormat="DD MMM YYYY" min="2016-01-01" max="2039-12-31"></ion-datetime>
+      </ion-item>
+    
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step3.controls.loss_date_discovery.hasError('required') && professional_form_step3.controls.loss_date_discovery.touched">
+        <p class="content">Please Select Date!</p>
+      </ion-item>
+
+      <div class="div-que add-margin">
+          <ion-label class="lbl-head">Is the complaint in writing?</ion-label>
+
+          <ion-radio-group formControlName="complaint_writing">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+
+        <div class="div-Y" *ngIf="this.professional_form_step3.get('complaint_writing').value == 'true'">
+
+          <div class="div-docs add-margin">
+
+            <h3 *ngIf="complaint_documents_image.length == 0" text-center>Please Select Image!</h3>
+    
+            <ion-list class="doc-list">
+                <ion-item lines="none" class="doc-item" *ngFor="let img of complaint_documents_image; index as pos" text-wrap>
+                    <ion-thumbnail slot="start">
+                        <ion-img *ngIf="img.fileIcon2" src="../../../assets/images/files.png"></ion-img>
+                        <ion-img *ngIf="!img.fileIcon2" [src]="img.path"></ion-img>
+                    </ion-thumbnail>
+                    <ion-label>
+                        {{ img.name }}
+                    </ion-label>
+                    <ion-button slot="end" fill="clear" (click)="delete_complaint_documents(img, pos)">
+                        <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
+                </ion-item>
+            </ion-list>
+            <div class="upload-btn-wrapper">
+              <ion-button fill="clear" color="dark" expand="full" class="btn">Attach all documents</ion-button>
+              <input type="file" (change)="complaint_documents($event)"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </div>
+          
+          </div>
+
+        </div>
+    
+    </div>
+
+    <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown lbl-over">How did you become aware of the complaint</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="how_aware_complaint" class="btn-select bg" mode="md">
+          <ion-select-option value="telephone call from complainer">Telephone call from complainer</ion-select-option>
+          <ion-select-option value="in person">In person</ion-select-option>
+          <ion-select-option value="email from_complainer">Email from complainer</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+    
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step3.controls.how_aware_complaint.hasError('required') && professional_form_step3.controls.how_aware_complaint.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+    
+      <!-- Other -->
+      <div *ngIf="professional_form_step3.get('how_aware_complaint').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+          <ion-input type="text" color="primary" formControlName="how_aware_complaint_other" class="input-box"></ion-input>
+        </ion-item>
+    
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="professional_form_step3.controls.how_aware_complaint_other.hasError('required') && professional_form_step3.controls.how_aware_complaint_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="professionalStep3Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

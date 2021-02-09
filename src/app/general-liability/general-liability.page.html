@@ -1,0 +1,152 @@
+<ion-header>
+    <ion-toolbar>
+      <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+      <ion-title color="primary" class="head">Client / Policyholder</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding class="page-other">
+  
+    <form [formGroup]="general_form" autocomplete="off">
+      
+      <!-- <div class="div-que">
+        <ion-label class="lbl-head">Do you know your policy number?</ion-label>
+  
+        <ion-radio-group formControlName="policy_holder">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+   class="div-Y" *ngIf="this.general_form.get('policy_holder').value == 'true'"
+      </div> -->
+  
+      <div>
+  
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Policy Number</ion-label>
+          <ion-input type="text" formControlName="policy_Number" color="primary" class="input-box"></ion-input>
+          <!-- <ion-icon name="help-circle-outline" color="primary" class="icon" (click)="detail()"></ion-icon> -->
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="general_form.controls.policy_Number.hasError('required') && general_form.controls.policy_Number.touched">
+          <p class="content">Please Enter Policy Number!</p>
+        </ion-item>
+  
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">First Name</ion-label>
+          <ion-input type="text" formControlName="tp_christian_policyholder" color="primary" class="input-box"></ion-input>
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="general_form.controls.tp_christian_policyholder.hasError('required') && general_form.controls.tp_christian_policyholder.touched">
+          <p class="content">Please Enter First Name!</p>
+        </ion-item>
+  
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Last Name</ion-label>
+          <ion-input type="text" formControlName="tp_name_policyholder" color="primary" class="input-box"></ion-input>
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="general_form.controls.tp_name_policyholder.hasError('required') && general_form.controls.tp_name_policyholder.touched">
+          <p class="content">Please Enter Last Name!</p>
+        </ion-item>
+  
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Telephone</ion-label>
+          <ion-input type="number" formControlName="contact_telephone" color="primary" class="input-box"></ion-input>
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="general_form.controls.contact_telephone.hasError('required') && general_form.controls.contact_telephone.touched">
+          <p class="content">Please Enter Telephone!</p>
+        </ion-item>
+  
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Mobile</ion-label>
+          <ion-input type="number" formControlName="contact_mobile" color="primary" class="input-box"></ion-input>
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="general_form.controls.contact_mobile.hasError('required') && general_form.controls.contact_mobile.touched">
+          <p class="content">Please Enter Mobile!</p>
+        </ion-item>
+  
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Email</ion-label>
+          <ion-input type="email" formControlName="contact_email" color="primary" class="input-box"></ion-input>
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="general_form.controls.contact_email.hasError('required') && general_form.controls.contact_email.touched">
+          <p class="content">Email Address is required!</p>
+        </ion-item>
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="general_form.controls.contact_email.hasError('pattern') && general_form.controls.contact_email.touched">
+          <p class="content">Please Enter a Valid Email Address!</p>
+        </ion-item>
+  
+      </div>
+  
+      <!-- <div class="div-N" *ngIf="general_form.get('policy_holder').value == 'false'">
+  
+        <ion-label class="lbl-contact-blk add less">Contact Us</ion-label>
+        
+        <ion-item lines="none" class="item-info">
+          <ion-label class="lbl-both" color="secondary">1300 305 834</ion-label>
+          <ion-icon slot="start" name="call" color="primary" class="icons"></ion-icon>
+        </ion-item>
+        <ion-item lines="none" class="item-info">
+          <ion-label class="lbl-both" color="secondary">ih@ihgroup.com.au</ion-label>
+          <ion-icon slot="start" name="mail" color="primary" class="icons"></ion-icon>
+        </ion-item>
+  
+        <ion-item class="item-dropdown add" lines="none">
+          <ion-label position="stacked" color="primary" class="lbl-dropdown">Speak to a broker near you</ion-label>
+          <ion-select interface="action-sheet" placeholder="Please Select Option" class="btn-select bg" mode="md">
+            <ion-select-option value="brown">abc</ion-select-option>
+            <ion-select-option value="blonde">def</ion-select-option>
+            <ion-select-option value="black">ghi</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <div class="info">
+        <ion-label color="primary" class="lbl-name">Sydney Office</ion-label>
+        <ion-label color="primary" class="lbl-add1">Level 2, 77 Pacific Highway</ion-label>
+        <ion-label color="primary" class="lbl-add2">North Sydney New South Wales 2060</ion-label>
+        <ion-label color="primary" class="lbl-phn">Phone: 02 8913 9100</ion-label>
+        <ion-label color="primary" class="lbl-fax">Fax: 1800 636 221</ion-label>
+        <ion-label color="primary" class="lbl-email">Email: ih@ihgroup.com.au</ion-label>
+        </div>
+
+      </div> -->
+  
+    </form>
+  
+  </ion-content>
+  
+  <ion-footer class="btns-footer">
+    <ion-row class="row-footer">
+      <ion-col class="col-footer border-R">
+          <!-- disabled="true" -->
+        <ion-button expand="full" size="large" class="btn-back" (click)="back()">
+          <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="col-footer border-L">
+        <ion-button expand="full" size="large" class="btn-next" (click)="generalNext()">
+          <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>

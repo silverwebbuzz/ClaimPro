@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="head">Sign in</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="page-signin">
+
+  <img src="../../assets/images/insurence-logo.png" class="lbl-logo" />
+
+  <form [formGroup]="login_form" autocomplete="off">
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Email</ion-label>
+      <ion-input type="text" formControlName="email" color="primary" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="login_form.controls.email.hasError('required') && login_form.controls.email.touched">
+      <p class="content">Please Enter Email Required!</p>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="login_form.controls.email.hasError('incorrect') && login_form.controls.email.touched">
+      <p class="content">Email Address Does Not Exists.</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Password</ion-label>
+      <ion-input [type]="passwordType" formControlName="password" color="primary" class="input-box"></ion-input>
+      <ion-icon name="eye" [color]="passwordShown === true ? 'primary' : 'medium'" slot="end" class="icon-eye" (click)="togglePassword()"></ion-icon>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="login_form.controls.password.hasError('required') && login_form.controls.password.touched">
+      <p class="content">Please Enter Password!</p>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="login_form.controls.password.hasError('incorrect') && login_form.controls.password.touched">
+      <p class="content">Invalid password.</p>
+    </ion-item>
+
+    <ion-label class="lbl-forgot">I forgot my <ion-text color="primary" routerLink="/forgotpass"> Password. </ion-text>
+    </ion-label>
+
+    <div class="btns-bottom">
+      <ion-label class="lbl-signup">Don't have an account? <ion-text color="primary" routerLink="/signup"> Sign up.
+        </ion-text>
+      </ion-label>
+      <ion-button expand="full" size="large" shape="round" class="btn-signin" (click)="doLogin()">SIGN IN</ion-button>
+    </div>
+  </form>
+
+</ion-content>

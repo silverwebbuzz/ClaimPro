@@ -1,0 +1,516 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Weather</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="weather_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Weather Details</ion-label>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Weather type</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="weather_type"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Lightning">Lightning</ion-select-option>
+        <ion-select-option value="Hail">Hail</ion-select-option>
+        <ion-select-option value="Rainwater falling from sky">Rainwater falling from sky</ion-select-option>
+        <ion-select-option value="Snow">Snow</ion-select-option>
+        <ion-select-option value="Wind">Wind</ion-select-option>
+        <ion-select-option value="Rainwater on ground">Rainwater on ground</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="weather_form.controls.weather_type.hasError('required') && weather_form.controls.weather_type.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="weather_form.get('weather_type').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="weather_type_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="weather_form.controls.weather_type_other.hasError('required') && weather_form.controls.weather_type_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Was the loss/damage caused by a natural disaster?</ion-label>
+
+      <ion-radio-group formControlName="cat_event">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Has your vehicle suffered damage?</ion-label>
+
+      <ion-radio-group formControlName="vehicle_suffered_damage">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.weather_form.get('vehicle_suffered_damage').value == 'true'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Damage to your vehicle</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="vehicle_damaged"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Vehicle is drivable">Vehicle is drivable</ion-select-option>
+          <ion-select-option value="Vehicle is not drivable">Vehicle is not drivable</ion-select-option>
+          <ion-select-option value="Not known">Not known</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="weather_form.controls.vehicle_damaged.hasError('required') && weather_form.controls.vehicle_damaged.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <div *ngIf="weather_form.get('vehicle_damaged').value == 'Vehicle is drivable'">
+
+        <ion-label class="lbl-contact-blk add-margin">Image of damages</ion-label>
+
+        <div class="div-docs add-margin">
+
+          <ion-row class="row-card">
+            <ion-col size="6" class="col-card">
+              <ion-card class="card-upload">
+                <ion-button fill="clear" class="btn-close" (click)="delete()">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+                <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                <ion-label class="lbl-filename">FileName</ion-label>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+          <div class="upload-btn-wrapper">
+            <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+            <input type="file" (change)="fileUpload($event)"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+          </div>
+
+          <!-- <ion-item no-padding lines="none" class="validator-error error"
+            *ngIf="weather_form.controls.myfile.hasError('required') && weather_form.controls.myfile.touched">
+            <p class="content text">Please Select Your Documents!</p>
+          </ion-item> -->
+
+        </div>
+
+        <div class="div-que add-margin">
+
+          <ion-label class="lbl-head">Do you have a quote to repair the damage?</ion-label>
+
+          <ion-radio-group formControlName="quote_repair">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+        </div>
+
+        <div class="div-Y" *ngIf="this.weather_form.get('quote_repair').value == 'true'">
+
+          <ion-label class="lbl-contact-blk add">Attach quote</ion-label>
+
+          <div class="div-docs add-margin">
+
+            <ion-row class="row-card">
+              <ion-col size="6" class="col-card">
+                <ion-card class="card-upload">
+                  <ion-button fill="clear" class="btn-close" (click)="delete()">
+                    <ion-icon name="close"></ion-icon>
+                  </ion-button>
+                  <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                  <ion-label class="lbl-filename">FileName</ion-label>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <div class="upload-btn-wrapper">
+              <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+              <input type="file" (change)="fileUpload($event)"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </div>
+
+            <!-- <ion-item no-padding lines="none" class="validator-error error"
+              *ngIf="weather_form.controls.myfile.hasError('required') && weather_form.controls.myfile.touched">
+              <p class="content text">Please Select Your Documents!</p>
+            </ion-item> -->
+
+          </div>
+
+          <div class="div-que add-margin">
+
+            <ion-label class="lbl-head">Are you claiming reimbursement of any costs?</ion-label>
+
+            <ion-radio-group formControlName="costs_reimbursed">
+              <ion-item lines="none" class="items-radio">
+                <ion-label class="lbl-radio">Yes</ion-label>
+                <ion-radio slot="start" value="true" mode="md"></ion-radio>
+              </ion-item>
+              <ion-item lines="none" class="items-radio">
+                <ion-label class="lbl-radio">No</ion-label>
+                <ion-radio slot="start" value="false" mode="md"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+          </div>
+
+          <div class="div-Y" *ngIf="this.weather_form.get('costs_reimbursed').value == 'true'">
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Name of account</ion-label>
+              <ion-input type="text" formControlName="bank_account_name" color="primary" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.bank_account_name.hasError('required') && weather_form.controls.bank_account_name.touched">
+              <p class="content">Please Enter Name!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="item-dropdown add">
+              <ion-label position="stacked" class="lbl-dropdown">Bank</ion-label>
+              <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="name_bank"
+                class="btn-select bg" mode="md">
+                <ion-select-option value="CBA">CBA</ion-select-option>
+                <ion-select-option value="Bendigo">Bendigo</ion-select-option>
+                <ion-select-option value="WESTPAC">WESTPAC</ion-select-option>
+                <ion-select-option value="NAB">NAB</ion-select-option>
+                <ion-select-option value="ANZ">ANZ</ion-select-option>
+                <ion-select-option value="St George">St George</ion-select-option>
+                <ion-select-option value="HSBC">HSBC</ion-select-option>
+                <ion-select-option value="aa">aa</ion-select-option>
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.name_bank.hasError('required') && weather_form.controls.name_bank.touched">
+              <p class="content">Please Select Required Field!</p>
+            </ion-item>
+
+            <!-- Other -->
+            <div *ngIf="weather_form.get('name_bank').value == 'Other'">
+              <ion-item lines="none" class="input-item add">
+                <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+                <ion-input type="text" color="primary" formControlName="name_bank_other" class="input-box">
+                </ion-input>
+              </ion-item>
+
+              <ion-item no-padding lines="none" class="validator-error"
+                *ngIf="weather_form.controls.name_bank_other.hasError('required') && weather_form.controls.name_bank_other.touched">
+                <p class="content">Please Enter Required Field!</p>
+              </ion-item>
+            </div>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Branch</ion-label>
+              <ion-input type="text" formControlName="bank_branch" color="primary" class="input-box"></ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.bank_branch.hasError('required') && weather_form.controls.bank_branch.touched">
+              <p class="content">Please Enter Branch!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">BSB</ion-label>
+              <ion-input type="text" formControlName="bank_bsb" color="primary" class="input-box"></ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.bank_bsb.hasError('required') && weather_form.controls.bank_bsb.touched">
+              <p class="content">Please Enter BSB!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Account number</ion-label>
+              <ion-input type="text" formControlName="bank_account_number" color="primary" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.bank_account_number.hasError('required') && weather_form.controls.bank_account_number.touched">
+              <p class="content">Please Enter Account Number!</p>
+            </ion-item>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div *ngIf="weather_form.get('vehicle_damaged').value == 'Vehicle is not drivable'">
+
+        <ion-label class="lbl-contact-blk add-margin">Where is the vehicle?</ion-label>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Street</ion-label>
+          <ion-input type="text" formControlName="where_vehicle_street" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="weather_form.controls.where_vehicle_street.hasError('required') && weather_form.controls.where_vehicle_street.touched">
+          <p class="content">Please Enter Street!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+          <ion-input type="text" formControlName="where_vehicle_suburb" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="weather_form.controls.where_vehicle_suburb.hasError('required') && weather_form.controls.where_vehicle_suburb.touched">
+          <p class="content">Please Enter Town!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+          <ion-input type="number" formControlName="where_vehicle_post_code" color="primary" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="weather_form.controls.where_vehicle_post_code.hasError('required') && weather_form.controls.where_vehicle_post_code.touched">
+          <p class="content">Please Enter Postcode!</p>
+        </ion-item>
+
+        <ion-label class="lbl-contact-blk add-margin">Image of damages</ion-label>
+
+        <div class="div-docs add-margin">
+
+          <ion-row class="row-card">
+            <ion-col size="6" class="col-card">
+              <ion-card class="card-upload">
+                <ion-button fill="clear" class="btn-close" (click)="delete()">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+                <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                <ion-label class="lbl-filename">FileName</ion-label>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+
+          <div class="upload-btn-wrapper">
+            <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+            <input type="file" (change)="fileUpload($event)"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+          </div>
+
+          <!-- <ion-item no-padding lines="none" class="validator-error error"
+            *ngIf="weather_form.controls.myfile.hasError('required') && weather_form.controls.myfile.touched">
+            <p class="content text">Please Select Your Documents!</p>
+          </ion-item> -->
+
+        </div>
+
+        <div class="div-que add-margin">
+
+          <ion-label class="lbl-head">Do you have a quote to repair the damage?</ion-label>
+
+          <ion-radio-group formControlName="quote_repair">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+        </div>
+
+        <div class="div-Y" *ngIf="this.weather_form.get('quote_repair').value == 'true'">
+
+          <ion-label class="lbl-contact-blk add">Attach quote</ion-label>
+
+          <div class="div-docs add-margin">
+
+            <ion-row class="row-card">
+              <ion-col size="6" class="col-card">
+                <ion-card class="card-upload">
+                  <ion-button fill="clear" class="btn-close" (click)="delete()">
+                    <ion-icon name="close"></ion-icon>
+                  </ion-button>
+                  <img src="../../../assets/images/insurence-logo.png" class="img-upload" />
+                  <ion-label class="lbl-filename">FileName</ion-label>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <div class="upload-btn-wrapper">
+              <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+              <input type="file" (change)="fileUpload($event)"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            </div>
+
+            <!-- <ion-item no-padding lines="none" class="validator-error error"
+              *ngIf="weather_form.controls.myfile.hasError('required') && weather_form.controls.myfile.touched">
+              <p class="content text">Please Select Your Documents!</p>
+            </ion-item> -->
+
+          </div>
+
+          <div class="div-que add-margin">
+
+            <ion-label class="lbl-head">Are you claiming reimbursement of any costs?</ion-label>
+
+            <ion-radio-group formControlName="costs_reimbursed">
+              <ion-item lines="none" class="items-radio">
+                <ion-label class="lbl-radio">Yes</ion-label>
+                <ion-radio slot="start" value="true" mode="md"></ion-radio>
+              </ion-item>
+              <ion-item lines="none" class="items-radio">
+                <ion-label class="lbl-radio">No</ion-label>
+                <ion-radio slot="start" value="false" mode="md"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+
+          </div>
+
+          <div class="div-Y" *ngIf="this.weather_form.get('costs_reimbursed').value == 'true'">
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Name of account</ion-label>
+              <ion-input type="text" formControlName="bank_account_name" color="primary" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.bank_account_name.hasError('required') && weather_form.controls.bank_account_name.touched">
+              <p class="content">Please Enter Name!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="item-dropdown add">
+              <ion-label position="stacked" class="lbl-dropdown">Bank</ion-label>
+              <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="name_bank"
+                class="btn-select bg" mode="md">
+                <ion-select-option value="CBA">CBA</ion-select-option>
+                <ion-select-option value="Bendigo">Bendigo</ion-select-option>
+                <ion-select-option value="WESTPAC">WESTPAC</ion-select-option>
+                <ion-select-option value="NAB">NAB</ion-select-option>
+                <ion-select-option value="ANZ">ANZ</ion-select-option>
+                <ion-select-option value="St George">St George</ion-select-option>
+                <ion-select-option value="HSBC">HSBC</ion-select-option>
+                <ion-select-option value="aa">aa</ion-select-option>
+                <ion-select-option value="Other">Other</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.name_bank.hasError('required') && weather_form.controls.name_bank.touched">
+              <p class="content">Please Select Required Field!</p>
+            </ion-item>
+
+            <!-- Other -->
+            <div *ngIf="weather_form.get('name_bank').value == 'Other'">
+              <ion-item lines="none" class="input-item add">
+                <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+                <ion-input type="text" color="primary" formControlName="name_bank_other" class="input-box">
+                </ion-input>
+              </ion-item>
+
+              <ion-item no-padding lines="none" class="validator-error"
+                *ngIf="weather_form.controls.name_bank_other.hasError('required') && weather_form.controls.name_bank_other.touched">
+                <p class="content">Please Enter Required Field!</p>
+              </ion-item>
+            </div>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Branch</ion-label>
+              <ion-input type="text" formControlName="bank_branch" color="primary" class="input-box"></ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.bank_branch.hasError('required') && weather_form.controls.bank_branch.touched">
+              <p class="content">Please Enter Branch!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">BSB</ion-label>
+              <ion-input type="text" formControlName="bank_bsb" color="primary" class="input-box"></ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.bank_bsb.hasError('required') && weather_form.controls.bank_bsb.touched">
+              <p class="content">Please Enter BSB!</p>
+            </ion-item>
+
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Account number</ion-label>
+              <ion-input type="text" formControlName="bank_account_number" color="primary" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="weather_form.controls.bank_account_number.hasError('required') && weather_form.controls.bank_account_number.touched">
+              <p class="content">Please Enter Account Number!</p>
+            </ion-item>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

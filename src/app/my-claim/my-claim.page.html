@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="head">My Claim</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-card">
+
+  <div class="div-no" *ngIf="MyClaim.length == 0">
+    <ion-label class="label-no">Record Not Available</ion-label>
+  </div>
+
+  <ion-card class="card-main" *ngFor="let opt of MyClaim;">
+
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-head">Type :</ion-col>
+      <ion-col size="6" class="col-value">{{ opt.policy_type }}</ion-col>
+    </ion-row>
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-head">Reference Number :</ion-col>
+      <ion-col size="6" class="col-value">{{ opt.id }}</ion-col>
+    </ion-row>
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-head">Policy Number :</ion-col>
+      <ion-col size="6" class="col-value">{{ opt.policy_number }}</ion-col>
+    </ion-row>
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-head">Name :</ion-col>
+      <ion-col size="6" class="col-value">{{ (opt.tp_christian_policyholder +' '+ opt.tp_name_policyholder) }}</ion-col>
+    </ion-row>
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-head">Date Submitted :</ion-col>
+      <ion-col size="6" class="col-value">{{ opt.created_date | date:'dd/MMM/yyyy' }}</ion-col>
+    </ion-row>
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-head">Status :</ion-col>
+      <ion-col size="6" class="col-value clr" *ngIf="opt.step_status == 'completed'">Completed</ion-col>
+      <ion-col size="6" class="col-value clr-red" *ngIf="opt.step_status != 'completed'">Pending</ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

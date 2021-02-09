@@ -1,0 +1,60 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons>
+        <ion-button color="primary" (click)="closeModal()">
+          <ion-icon name="close" size="large"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title color="primary" class="head">Review Claim</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content class="page-review"> {{formValues}}
+  
+    <div class="div-no" *ngIf="this.notAvailable == 0">
+      <ion-label class="label-no">Record Not Available</ion-label>
+    </div>
+  
+    <div *ngIf="this.notAvailable == 1">
+  
+      <div *ngFor="let opt of formValues; let i=index">
+  
+  
+        <ion-row class="row-items">
+          <ion-col size="2" class="col-items">
+            <div class="no">{{i+1}}</div>
+          </ion-col>
+          <ion-col size="10" class="col-items">
+            <h3 class="lbl-que">{{ opt.question }}</h3>
+            <p class="lbl-ans" *ngIf="opt.type == 'text'">
+              {{ opt.answers }}</p>
+            <p class="lbl-ans" *ngIf="opt.type == 'radio'">
+              {{ opt.answers  ? 'Yes' : 'No' }}</p>
+            <p class="lbl-ans" *ngIf="opt.type == 'date'">
+              {{ opt.answers | date : 'dd/MMMM/yyyy' }}</p>
+            <p class="lbl-ans" *ngIf="opt.type == 'bdate'">
+              {{ opt.answers | date : 'dd/MMMM/yyyy' }}</p>
+            <p class="lbl-ans" *ngIf="opt.type == 'time'">
+              {{ opt.answers }}</p>
+            <p class="lbl-ans" *ngIf="opt.type == 'dropdown'">
+              {{ opt.answers }}</p>
+            <p class="lbl-ans" *ngIf="opt.answers1">{{ opt.answers1 }}
+            </p>
+  
+          </ion-col>
+        </ion-row>
+  
+        <!-- <ion-row class="row-items">
+          <ion-col size="2" class="col-items">
+            <div class="no">2</div>
+          </ion-col>
+          <ion-col size="10" class="col-items">
+            <h3 class="lbl-que">Policy Number</h3>
+            <p class="lbl-ans">123456kkk</p>
+          </ion-col>
+        </ion-row> -->
+  
+      </div>
+    </div>
+  
+  </ion-content>

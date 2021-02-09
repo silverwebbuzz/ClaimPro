@@ -1,0 +1,222 @@
+<ion-header>
+    <ion-toolbar>
+      <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+      <ion-title color="primary" class="head">Client / Policyholder</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <form [formGroup]="medical_form_step2" autocomplete="off">
+  
+      <!-- <div class="div-que">
+        <ion-label class="lbl-head">Do you trade under a business name?</ion-label>
+  
+        <ion-radio-group formControlName="business_name">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div> -->
+  
+      <!-- <div class="div-Y" *ngIf="this.medical_form_step2.get('business_name').value == 'true'">
+  
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">Trading name</ion-label>
+            <ion-input type="text" formControlName="trading_name" color="primary" class="input-box"></ion-input>
+          </ion-item>
+  
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="medical_form_step2.controls.trading_name.hasError('required') && medical_form_step2.controls.trading_name.touched">
+            <p class="content">Please Enter Trading name!</p>
+          </ion-item>
+  
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">ABN</ion-label>
+            <ion-input type="text" formControlName="abn_client" color="primary" class="input-box"></ion-input>
+          </ion-item>
+  
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="medical_form_step2.controls.abn_client.hasError('required') && medical_form_step2.controls.abn_client.touched">
+            <p class="content">Please Enter ABN!</p>
+          </ion-item>
+  
+        </div> -->
+  
+        <ion-item class="item-dropdown add" lines="none">
+          <ion-label position="stacked" class="lbl-dropdown">On what basis are you employed?</ion-label>
+          <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="employment_classification" class="btn-select bg" mode="md">
+              <ion-select-option *ngFor="let opt of employment_classification | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+            <!-- <ion-select-option value="Employee (Full time)">Employee (Full time)</ion-select-option>
+            <ion-select-option value="Employee (Part Time)">Employee (Part Time)</ion-select-option>
+            <ion-select-option value="Sole Trader">Sole Trader</ion-select-option>
+            <ion-select-option value="Partner">Partner</ion-select-option>
+            <ion-select-option value="Locum">Locum</ion-select-option>
+            <ion-select-option value="Principle">Principle</ion-select-option>
+            <ion-select-option value="Other">Other</ion-select-option> -->
+          </ion-select>
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="medical_form_step2.controls.employment_classification.hasError('required') && medical_form_step2.controls.employment_classification.touched">
+          <p class="content">Please Select Required Field!</p>
+        </ion-item>
+  
+        <!-- Other -->
+        <div *ngIf="medical_form_step2.get('employment_classification').value == '1880'">
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+            <ion-input type="text" color="primary" formControlName="employment_classification_other" class="input-box"></ion-input>
+          </ion-item>
+  
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="medical_form_step2.controls.employment_classification_other.hasError('required') && medical_form_step2.controls.employment_classification_other.touched">
+            <p class="content">Please Enter Required Field!</p>
+          </ion-item>
+        </div>
+  
+        <ion-item class="item-dropdown add" lines="none">
+          <ion-label position="stacked" class="lbl-dropdown">What is your employment status?</ion-label>
+          <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="employment_status" class="btn-select bg" mode="md">
+              <!-- <ion-select-option *ngFor="let opt of employment_status | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option> -->
+            <ion-select-option value="1882">Private Practioner</ion-select-option>
+            <ion-select-option value="1883">Partner</ion-select-option>
+            <ion-select-option value="1884">Public Practioner</ion-select-option>
+            <ion-select-option value="1943">Restricted(Less then 15 hours)</ion-select-option>
+            <ion-select-option value="1944">Retiree</ion-select-option>
+            <ion-select-option value="1945">1st Year Practioner</ion-select-option>
+            <ion-select-option value="1946">Locum</ion-select-option>
+            <ion-select-option value="1947">Student</ion-select-option>
+            <ion-select-option value="1885">Other</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="medical_form_step2.controls.employment_status.hasError('required') && medical_form_step2.controls.employment_status.touched">
+          <p class="content">Please Select Required Field!</p>
+        </ion-item>
+  
+        <!-- Other -->
+        <div *ngIf="medical_form_step2.get('employment_status').value == '1885'">
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+            <ion-input type="text" color="primary" formControlName="employment_status_other" class="input-box">
+            </ion-input>
+          </ion-item>
+  
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="medical_form_step2.controls.employment_status_other.hasError('required') && medical_form_step2.controls.employment_status_other.touched">
+            <p class="content">Please Enter Required Field!</p>
+          </ion-item>
+        </div>
+  
+        <ion-item class="item-dropdown add" lines="none">
+          <ion-label position="stacked" class="lbl-dropdown">What is your length experience?</ion-label>
+          <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="years_experience" class="btn-select bg" mode="md">
+            <ion-select-option value="Less than 1 year">Less than 1 year</ion-select-option>
+            <ion-select-option value="1-5 years">1 - 5 years</ion-select-option>
+            <ion-select-option value="More than 5 years">More than 5 years</ion-select-option>
+          </ion-select>
+        </ion-item>
+  
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="medical_form_step2.controls.years_experience.hasError('required') && medical_form_step2.controls.years_experience.touched">
+          <p class="content">Please Select Required Field!</p>
+        </ion-item>
+
+        <ion-item class="item-dropdown add" lines="none">
+            <ion-label position="stacked" class="lbl-dropdown">Where did you qualify?</ion-label>
+            <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="where_qualified" class="btn-select bg" mode="md">
+                <ion-select-option *ngFor="let opt of where_qualified | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+              <!-- <ion-select-option value="University">University</ion-select-option>
+              <ion-select-option value="Overseas Qualification">Overseas Qualification</ion-select-option>
+              <ion-select-option value="Other">Other</ion-select-option> -->
+            </ion-select>
+          </ion-item>
+    
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="medical_form_step2.controls.where_qualified.hasError('required') && medical_form_step2.controls.where_qualified.touched">
+            <p class="content">Please Select Required Field!</p>
+          </ion-item>
+    
+          <!-- Other -->
+          <div *ngIf="medical_form_step2.get('where_qualified').value == '1895'">
+            <ion-item lines="none" class="input-item add">
+              <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+              <ion-input type="text" color="primary" formControlName="where_qualified_other" class="input-box">
+              </ion-input>
+            </ion-item>
+    
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="medical_form_step2.controls.where_qualified_other.hasError('required') && medical_form_step2.controls.where_qualified_other.touched">
+              <p class="content">Please Enter Required Field!</p>
+            </ion-item>
+          </div>
+
+          <ion-item class="item-dropdown add" lines="none">
+              <ion-label position="stacked" class="lbl-dropdown">What type of practitioner are you?</ion-label>
+              <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="type_practioner" class="btn-select bg" mode="md">
+                  <ion-select-option *ngFor="let opt of type_practioner | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+                <!-- <ion-select-option value="General">General</ion-select-option>
+                <ion-select-option value="Sports">Sports</ion-select-option>
+                <ion-select-option value="Musculoskeletal">Musculoskeletal</ion-select-option>
+                <ion-select-option value="Cardiothoracic">Cardiothoracic</ion-select-option>
+                <ion-select-option value="Neurological">Neurological</ion-select-option>
+                <ion-select-option value="Aquatic">Aquatic</ion-select-option>
+                <ion-select-option value="Paediatric">Paediatric</ion-select-option>
+                <ion-select-option value="Genontological">Genontological</ion-select-option>
+                <ion-select-option value="Continence & Womens Health">Continence & Womens Health</ion-select-option>
+                <ion-select-option value="Animal Physiotherapist">Animal Physiotherapist</ion-select-option>
+                <ion-select-option value="Acupuncture">Acupuncture</ion-select-option>
+                <ion-select-option value="Aged Care">Aged Care</ion-select-option>
+                <ion-select-option value="Occupational Physiotherapy">Occupational Physiotherapy</ion-select-option>
+                <ion-select-option value="Other">Other</ion-select-option> -->
+              </ion-select>
+            </ion-item>
+      
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="medical_form_step2.controls.type_practioner.hasError('required') && medical_form_step2.controls.type_practioner.touched">
+              <p class="content">Please Select Required Field!</p>
+            </ion-item>
+      
+            <!-- Other -->
+            <div *ngIf="medical_form_step2.get('type_practioner').value == '1890'">
+              <ion-item lines="none" class="input-item add">
+                <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+                <ion-input type="text" color="primary" formControlName="type_practioner_other" class="input-box">
+                </ion-input>
+              </ion-item>
+      
+              <ion-item no-padding lines="none" class="validator-error"
+                *ngIf="medical_form_step2.controls.type_practioner_other.hasError('required') && medical_form_step2.controls.type_practioner_other.touched">
+                <p class="content">Please Enter Required Field!</p>
+              </ion-item>
+            </div>
+  
+    </form>
+  
+  </ion-content>
+  
+  <ion-footer class="btns-footer">
+    <ion-row class="row-footer">
+      <ion-col class="col-footer border-R">
+        <ion-button expand="full" class="btn-back" (click)="back()">
+          <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col class="col-footer border-L">
+        <ion-button expand="full" class="btn-next" (click)="medicalStep2Next()">
+          <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-footer>

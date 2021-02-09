@@ -1,0 +1,144 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="head">Contact Us</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding>
+
+  <!-- <ion-label class="lbl-contact">Contact Us</ion-label> -->
+
+  <div class="div-info">
+    <ion-item lines="none" class="item-info">
+      <ion-label class="lbl-both" color="secondary">1300 305 834</ion-label>
+      <ion-icon slot="start" name="call" color="primary" class="icons"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" class="item-info">
+      <ion-label class="lbl-both" color="secondary">ih@ihgroup.com.au</ion-label>
+      <ion-icon slot="start" name="mail" color="primary" class="icons"></ion-icon>
+    </ion-item>
+  </div>
+
+  <!-- <ion-item class="item-dropdown add" lines="none">
+    <ion-label position="stacked" color="primary" class="lbl-dropdown">Speak to a broker near you</ion-label>
+    <ion-select interface="action-sheet" placeholder="Please Select Option" class="btn-select bg" mode="md">
+      <ion-select-option value="brown">abc</ion-select-option>
+      <ion-select-option value="blonde">def</ion-select-option>
+      <ion-select-option value="black">ghi</ion-select-option>
+    </ion-select>
+  </ion-item> -->
+
+  <!-- <div class="info">
+  <ion-label color="primary" class="lbl-name">Sydney Office</ion-label>
+  <ion-label color="primary" class="lbl-add1">Level 2, 77 Pacific Highway</ion-label>
+  <ion-label color="primary" class="lbl-add2">North Sydney New South Wales 2060</ion-label>
+  <ion-label color="primary" class="lbl-phn">Phone: 02 8913 9100</ion-label>
+  <ion-label color="primary" class="lbl-fax">Fax: 1800 636 221</ion-label>
+  <ion-label color="primary" class="lbl-email">Email: ih@ihgroup.com.au</ion-label>
+  </div> -->
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">East Melbourne - Head Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">Level 3, 100 Wellington Pde</ion-label>
+    <ion-label color="primary" class="lbl-add2">East Melbourne Victoria 3002</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">03 9235 5222</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">1800 636 221</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Sydney Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">Level 19, Suite 2, 227 Elizabeth Street</ion-label>
+    <ion-label color="primary" class="lbl-add2">Sydney New South Wales 2000</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">02 8913 9100</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">1800 636 221</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Brisbane Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">Level 1, 217 Logan Road</ion-label>
+    <ion-label color="primary" class="lbl-add2">Woolloongabba Queensland 4102</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">07 3228 7600</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">07 3228 7601</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Echuca Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">390 High Street</ion-label>
+    <ion-label color="primary" class="lbl-add2">Echuca Victoria 3564</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">03 5483 1066</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">1800 636 221</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Boort Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">99a Godfrey Street</ion-label>
+    <ion-label color="primary" class="lbl-add2">Boort Victoria 3537</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">03 5483 1090</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">1800 636 221</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Erina Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">Suite 8, First Floor, Fountain Plaza</ion-label>
+    <ion-label color="primary" class="lbl-add2">158 The Entrance Road Erina New South Wales 2250</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">02 8913 9127</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">1800 636 221</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Kyabram Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">187-189 Allan Street</ion-label>
+    <ion-label color="primary" class="lbl-add2">Kyabram Victoria 3620</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">03 5851 0300</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">03 5851 0301</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Narrabri Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">60 Maitland Street</ion-label>
+    <ion-label color="primary" class="lbl-add2">Narrabri New South Wales 2390</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">02 6792 5557</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">02 6792 5576</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Tamworth Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">26 Bourke Street</ion-label>
+    <ion-label color="primary" class="lbl-add2">Tamworth New South Wales 2340</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">02 6766 9688</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">1800 636 221</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Wagga Wagga Office</ion-label>
+    <ion-label color="primary" class="lbl-add1">101 Peter Street</ion-label>
+    <ion-label color="primary" class="lbl-add2">Wagga Wagga New South Wales 2650</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">02 8913 9154</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">1800 636 221</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+  <ion-card class="info">
+    <ion-label color="secondary" class="lbl-name">Port Macquarie</ion-label>
+    <ion-label color="primary" class="lbl-add1">Suite 2, 85 William Street</ion-label>
+    <ion-label color="primary" class="lbl-add2">Port Macquarie New South Wales 2444</ion-label>
+    <ion-label class="lbl-phn">Phone : <span class="lbl-phn-value">02 6584 1284</span></ion-label>
+    <ion-label class="lbl-fax">Fax : <span class="lbl-fax-value">1800 636 221</span></ion-label>
+    <ion-label class="lbl-email">Email : <span class="lbl-email-value">ih@ihgroup.com.au</span></ion-label>
+  </ion-card>
+
+</ion-content>

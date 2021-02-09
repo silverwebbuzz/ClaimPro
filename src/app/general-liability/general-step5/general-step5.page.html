@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Upload documentation</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-docs">
+
+  <form [formGroup]="general_form_step5" autocomplete="off">
+
+    
+    <h3 *ngIf="images.length == 0" text-center>Please Select Image!</h3>
+
+    <ion-list class="doc-list">
+        <ion-item lines="none" class="doc-item" *ngFor="let img of images; index as pos" text-wrap>
+            <ion-thumbnail slot="start">
+                <ion-img *ngIf="img.fileIcon" src="../../../assets/images/files.png"></ion-img>
+                <ion-img *ngIf="!img.fileIcon" [src]="img.path"></ion-img>
+            </ion-thumbnail>
+            <ion-label>
+                {{ img.name }}
+            </ion-label>
+            <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-button>
+        </ion-item>
+    </ion-list>
+   
+
+    <div class="upload-btn-wrapper">
+        <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+        <input type="file" formControlName="upload_document" (change)="fileUpload($event)"
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+    </div>
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" size="large" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" size="large" class="btn-next" (click)="generalStep5Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

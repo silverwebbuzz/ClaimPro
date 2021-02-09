@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="head">New Claim</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-home">
+
+    <img src="../../assets/images/placeholder.jpg" class="img-head"/>
+
+    <ion-label color="secondary" class="lbl-head">What type of claim would you like to make ?</ion-label>
+  
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-card">
+        <ion-card class="card-service">
+            <!-- (click)="formProperty()" -->
+          <img src="../../assets/images/services/w-property.png" class="img-service home-img-clr"/>
+          <ion-label color="secondary" class="lbl-service">Property</ion-label>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" class="col-card">
+        <ion-card class="card-service">
+            <!-- (click)="formVehicle()" -->
+          <img src="../../assets/images/services/w-vehicle.png" class="img-service home-img-clr"/>
+          <ion-label color="secondary" class="lbl-service">Vehicle</ion-label>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-card">
+        <ion-card class="card-service">
+            <!-- (click)="formMedical()" -->
+          <img src="../../assets/images/services/w-medical.png" class="img-service home-img-clr"/>
+          <ion-label color="secondary" class="lbl-service">Medical Malpractice</ion-label>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" class="col-card">
+        <ion-card class="card-service">
+            <!-- (click)="formProfestional()" -->
+          <img src="../../assets/images/services/w-professional.png" class="img-service home-img-clr"/>
+          <ion-label color="secondary" class="lbl-service">Professional Indemnity</ion-label>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    
+    <ion-row class="row-card">
+      <ion-col size="6" class="col-card">
+        <ion-card class="card-service" (click)="formGeneral()">
+          <img src="../../assets/images/services/w-general.png" class="img-service home-img-clr"/>
+          <ion-label color="secondary" class="lbl-service">General Liability</ion-label>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" class="col-card">
+        <ion-card class="card-service" (click)="formOther()"> 
+          <img src="../../assets/images/services/w-other.png" class="img-service home-img-clr"/>
+          <ion-label color="secondary" class="lbl-service">Other</ion-label>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+</ion-content>

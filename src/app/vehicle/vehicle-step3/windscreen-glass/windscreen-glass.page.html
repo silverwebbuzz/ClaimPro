@@ -1,0 +1,218 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <!-- {{damage_type}} -->
+    <ion-title color="primary" class="head">Windscreen/Glass</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="windscreen_glass_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Windscreen/Glass Details</ion-label>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">How did this occur?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="vehicle_how_did_occur"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Stone">Stone</ion-select-option>
+        <ion-select-option value="Malicious Damage">Malicious Damage</ion-select-option>
+        <ion-select-option value="Attempted Theft">Attempted Theft</ion-select-option>
+        <ion-select-option value="Ball">Ball</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="windscreen_glass_form.controls.vehicle_how_did_occur.hasError('required') && windscreen_glass_form.controls.vehicle_how_did_occur.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="windscreen_glass_form.get('vehicle_how_did_occur').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="vehicle_how_did_occur_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="windscreen_glass_form.controls.vehicle_how_did_occur_other.hasError('required') && windscreen_glass_form.controls.vehicle_how_did_occur_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Has the glass been repaired?</ion-label>
+
+      <ion-radio-group formControlName="has_glass_repaired">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-Y" *ngIf="this.windscreen_glass_form.get('has_glass_repaired').value == 'true'">
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Name of contractor</ion-label>
+        <ion-input type="text" formControlName="contractor_name" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="windscreen_glass_form.controls.contractor_name.hasError('required') && windscreen_glass_form.controls.contractor_name.touched">
+        <p class="content">Please Enter Name!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Street</ion-label>
+        <ion-input type="text" formControlName="contractor_street" color="primary" class="input-box" id="contractor_street" (ionFocus)="contractorAddress()"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="windscreen_glass_form.controls.contractor_street.hasError('required') && windscreen_glass_form.controls.contractor_street.touched">
+        <p class="content">Please Enter Street!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+        <ion-input type="text" formControlName="contractor_suburb" color="primary" class="input-box"  id="contractor_suburb"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="windscreen_glass_form.controls.contractor_suburb.hasError('required') && windscreen_glass_form.controls.contractor_suburb.touched">
+        <p class="content">Please Enter Town!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+        <ion-input type="number" formControlName="contractor_post_code" color="primary" class="input-box"  id="contractor_post_code"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="windscreen_glass_form.controls.contractor_post_code.hasError('required') && windscreen_glass_form.controls.contractor_post_code.touched">
+        <p class="content">Please Enter Postcode!</p>
+      </ion-item>
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Cost</ion-label>
+        <ion-input type="text" formControlName="repair_cost" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="windscreen_glass_form.controls.repair_cost.hasError('required') && windscreen_glass_form.controls.repair_cost.touched">
+        <p class="content">Please Enter Cost!</p>
+      </ion-item>
+
+      <div class="div-que add-margin">
+
+        <ion-label class="lbl-head">Have you paid this cost?</ion-label>
+
+        <ion-radio-group formControlName="cost_paid">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </div>
+
+      <div class="div-Y" *ngIf="this.windscreen_glass_form.get('cost_paid').value == 'true'">
+
+          <div class="div-docs add-margin">
+
+              <h3 *ngIf="attach_receipt_image.length == 0" text-center>Please Select Image!</h3>
+      
+              <ion-list class="doc-list">
+                  <ion-item lines="none" class="doc-item" *ngFor="let img of attach_receipt_image; index as pos" text-wrap>
+                      <ion-thumbnail slot="start">
+                          <ion-img *ngIf="img.fileIcon" src="../../../assets/images/files.png"></ion-img>
+                          <ion-img *ngIf="!img.fileIcon" [src]="img.path"></ion-img>
+                      </ion-thumbnail>
+                      <ion-label>
+                          {{ img.name }}
+                      </ion-label>
+                      <ion-button slot="end" fill="clear" (click)="delete_attach_receipt(img, pos)">
+                          <ion-icon slot="icon-only" name="trash"></ion-icon>
+                      </ion-button>
+                  </ion-item>
+              </ion-list>
+              <div class="upload-btn-wrapper">
+                <ion-button fill="clear" color="dark" expand="full" class="btn">Attach receipt</ion-button>
+                <input type="file" (change)="attach_receipt($event)"
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+              </div>
+      
+             
+            </div>
+
+
+      </div>
+
+      <div class="div-N" *ngIf="this.windscreen_glass_form.get('cost_paid').value == 'false'">
+
+        <div class="div-docs add-margin">
+
+          <h3 *ngIf="attach_invoice_image.length == 0" text-center>Please Select Image!</h3>
+  
+          <ion-list class="doc-list">
+              <ion-item lines="none" class="doc-item" *ngFor="let img of attach_invoice_image; index as pos" text-wrap>
+                  <ion-thumbnail slot="start">
+                      <ion-img *ngIf="img.fileIcon" src="../../../assets/images/files.png"></ion-img>
+                      <ion-img *ngIf="!img.fileIcon" [src]="img.path"></ion-img>
+                  </ion-thumbnail>
+                  <ion-label>
+                      {{ img.name }}
+                  </ion-label>
+                  <ion-button slot="end" fill="clear" (click)="delete_attach_invoice(img, pos)">
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                  </ion-button>
+              </ion-item>
+          </ion-list>
+          <div class="upload-btn-wrapper">
+            <ion-button fill="clear" color="dark" expand="full" class="btn">Attach invoice</ion-button>
+            <input type="file" (change)="attach_invoice($event)"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+          </div>
+  
+         
+        </div>
+
+      </div>
+
+    </div>
+
+    </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click) = "windscreenGlassNext()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

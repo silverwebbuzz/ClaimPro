@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Briefly tell us</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="property_form_step7" autocomplete="off">
+
+    <!-- <ion-label class="lbl-contact">Briefly tell us what happened</ion-label> -->
+
+    <ion-item lines="none" class="input-item">
+      <ion-label position="stacked" class="input-lbl">Briefly tell us what happened</ion-label>
+      <ion-textarea rows="3" formControlName="reported_circumstances" type="text" color="primary" class="input-box">
+      </ion-textarea>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="property_form_step7.controls.reported_circumstances.hasError('required') && property_form_step7.controls.reported_circumstances.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="property_form_step7.controls.reported_circumstances.hasError('maxlength') && property_form_step7.controls.reported_circumstances.touched">
+      <p class="content">Allow Only 400 Characters!</p>
+    </ion-item>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="propertyStep7Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

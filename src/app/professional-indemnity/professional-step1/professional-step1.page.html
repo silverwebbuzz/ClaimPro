@@ -1,0 +1,247 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Client / Policyholder</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="professional_form_step1" autocomplete="off">
+    <ion-item lines="none" class="item-dropdown">
+      <ion-label position="stacked" class="lbl-dropdown">How would you like to be contacted?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="preferred_communication" class="btn-select bg" mode="md">
+          <ion-select-option *ngFor="let opt of preferred_communication | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+        <!-- <ion-select-option value="Telephone">Telephone</ion-select-option>
+        <ion-select-option value="Email">Email</ion-select-option>
+        <ion-select-option value="SMS">SMS</ion-select-option>
+        <ion-select-option value="Letter">Letter</ion-select-option> -->
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step1.controls.preferred_communication.hasError('required') && professional_form_step1.controls.preferred_communication.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <ion-item class="item-dropdown add" lines="none">
+      <ion-label position="stacked" class="lbl-dropdown">Are you making a personal claim or business claim?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="type_entitiy" class="btn-select bg" mode="md">
+          <ng-container *ngFor="let opt of client_type | keyvalue">
+          <ion-select-option *ngIf="opt.key == '1001' || opt.key == '1002'" [value]="opt.key">{{opt.value}}</ion-select-option>
+        <!-- <ion-select-option value="Personal">Personal</ion-select-option>
+        <ion-select-option value="Commercial">Commercial</ion-select-option>
+        <ion-select-option value="Government">Government</ion-select-option>
+        <ion-select-option value="Association">Association</ion-select-option> -->
+          </ng-container>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+    *ngIf="professional_form_step1.controls.type_entitiy.hasError('required') && professional_form_step1.controls.type_entitiy.touched">
+    <p class="content">Please Select Required Field!</p>
+  </ion-item>
+
+    <div *ngIf="professional_form_step1.get('type_entitiy').value == '1002' ||  professional_form_step1.get('type_entitiy').value == '1004' ||  professional_form_step1.get('type_entitiy').value == '1003'">
+    
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Business name</ion-label>
+        <ion-input type="text" formControlName="client_company" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step1.controls.client_company.hasError('required') && professional_form_step1.controls.client_company.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Trading name</ion-label>
+        <ion-input type="text" formControlName="trading_name" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step1.controls.trading_name.hasError('required') && professional_form_step1.controls.trading_name.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">ABN</ion-label>
+        <ion-input type="text" formControlName="abn_client" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step1.controls.abn_client.hasError('required') && professional_form_step1.controls.abn_client.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">ITC%</ion-label>
+        <ion-input type="text" formControlName="itc_client" color="primary" class="input-box"></ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step1.controls.itc_client.hasError('required') && professional_form_step1.controls.itc_client.touched">
+      <p class="content">Please Enter Required Field!</p>
+    </ion-item>
+
+</div>
+
+    <!-- <div class="div-que add-margin">
+      <ion-label class="lbl-head">Are you licensed to conduct Health Care Services?</ion-label>
+
+      <ion-radio-group formControlName="health_care_service">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div> -->
+
+    <ion-item class="item-dropdown" lines="none">
+      <ion-label position="stacked" class="lbl-dropdown">What is your professional occupation?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="description_business" class="btn-select bg" mode="md">
+        <ion-select-option value="Accountant">Accountant</ion-select-option>
+        <ion-select-option value="Aged Care">Aged Care</ion-select-option>
+        <ion-select-option value="Architecture">Architecture</ion-select-option>
+        <ion-select-option value="Builder">Builder</ion-select-option>
+        <ion-select-option value="Building Designer">Building Designer</ion-select-option>
+        <ion-select-option value="Building Inspector">Building Inspector</ion-select-option>
+        <ion-select-option value="Construction">Construction</ion-select-option>
+        <ion-select-option value="Consultant">Consultant</ion-select-option>
+        <ion-select-option value="Engineering">Engineering</ion-select-option>
+        <ion-select-option value="Lawyer">Lawyer</ion-select-option>
+        <ion-select-option value="Mechanic">Mechanic</ion-select-option>
+        <ion-select-option value="Migration Agent">Migration Agent</ion-select-option>
+        <ion-select-option value="Pharmacist">Pharmacist</ion-select-option>
+        <ion-select-option value="Plumber">Plumber</ion-select-option>
+        <ion-select-option value="Podiatrist">Podiatrist</ion-select-option>
+        <ion-select-option value="Project Manager">Project Manager</ion-select-option>
+        <ion-select-option value="Psychologist">Psychologist</ion-select-option>
+        <ion-select-option value="Real Estate Agent">Real Estate Agent</ion-select-option>
+        <ion-select-option value="Recruitment">Recruitment</ion-select-option>
+        <ion-select-option value="Solicitor">Solicitor</ion-select-option>
+        <ion-select-option value="Surveyor">Surveyor</ion-select-option>
+        <ion-select-option value="Travel Agent">Travel Agent</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step1.controls.description_business.hasError('required') && professional_form_step1.controls.description_business.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="professional_form_step1.get('description_business').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+        <ion-input type="text" color="primary" formControlName="description_business_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step1.controls.description_business_other.hasError('required') && professional_form_step1.controls.description_business_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <div class="div-que add-margin">
+      <ion-label class="lbl-head">Are you required to be licensed to practice?</ion-label>
+
+      <ion-radio-group formControlName="licensed_service">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-que add-margin">
+      <ion-label class="lbl-head">Do you hold the required qualifications?</ion-label>
+
+      <ion-radio-group formControlName="required_qualifications">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <ion-item class="item-dropdown" lines="none">
+      <ion-label position="stacked" class="lbl-dropdown">Select your professional association</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="association_name_picklist" class="btn-select bg" mode="md">
+        <ion-select-option value="MAA">MAA</ion-select-option>
+        <ion-select-option value="ACPA">ACPA</ion-select-option>
+        <ion-select-option value="APODdA">APODdA</ion-select-option>
+        <ion-select-option value="MFAA">MFAA</ion-select-option>
+        <ion-select-option value="Aussie Home Loans">Aussie Home Loans</ion-select-option>
+        <ion-select-option value="Connective">Connective</ion-select-option>
+        <ion-select-option value="Mortgage Choice">Mortgage Choice</ion-select-option>
+        <ion-select-option value="Outsource Financial">Outsource Financial</ion-select-option>
+        <ion-select-option value="National Mortgage Brokers">National Mortgage Brokers</ion-select-option>
+        <ion-select-option value="BSA">BSA</ion-select-option>
+        <ion-select-option value="APA">APA</ion-select-option>
+        <ion-select-option value="Australian Podiatrists Council">Australian Podiatrists Council</ion-select-option>
+        <ion-select-option value="PACFA">PACFA</ion-select-option>
+        <ion-select-option value="Pay Wise">Pay Wise</ion-select-option>
+        <ion-select-option value="APNA">APNA</ion-select-option>
+        <ion-select-option value="Kings Transport">Kings Transport</ion-select-option>
+        <ion-select-option value="MMS">MMS</ion-select-option>
+        <ion-select-option value="SSAA">SSAA</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="professional_form_step1.controls.association_name_picklist.hasError('required') && professional_form_step1.controls.association_name_picklist.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <!-- Other -->
+    <div *ngIf="professional_form_step1.get('association_name_picklist').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Please specify</ion-label>
+        <ion-input type="text" color="primary" formControlName="association_name_picklist_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="professional_form_step1.controls.association_name_picklist_other.hasError('required') && professional_form_step1.controls.association_name_picklist_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="professionalStep1Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

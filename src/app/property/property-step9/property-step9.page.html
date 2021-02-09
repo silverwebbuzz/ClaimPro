@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="head">Review claim & submit</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-label class="lbl-head">You're almost done, would you like to review your claim?</ion-label>
+
+  <ion-label class="lbl-note" color="primary">* claims cannot be changed once submitted.</ion-label>
+
+  <!-- <ion-button expand="full" class="btn-review"></ion-button> -->
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="reviewClaim('review-property','property')">Review My Claim</ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="submitClaim()">Submit My Claim</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

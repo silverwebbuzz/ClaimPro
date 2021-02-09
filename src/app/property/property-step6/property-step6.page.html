@@ -1,0 +1,300 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
+    <ion-title color="primary" class="head">Emergency works</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="property_form_step6" autocomplete="off">
+
+    <div class="div-que">
+      <ion-label class="lbl-head">Emergency works needed?</ion-label>
+      <ion-radio-group formControlName="emergency_works_needed">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+    <div class="div-Y" *ngIf="this.property_form_step6.get('emergency_works_needed').value == 'true'">
+      <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Type of works still required</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="works_required"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Reinstallation">Reinstallation</ion-select-option>
+          <ion-select-option value="Repair">Repair</ion-select-option>
+          <ion-select-option value="Rewiring">Rewiring</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step6.controls.works_required.hasError('required') && property_form_step6.controls.works_required.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="property_form_step6.get('works_required').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <ion-input type="text" color="primary" formControlName="works_required_other" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="property_form_step6.controls.works_required_other.hasError('required') && property_form_step6.controls.works_required_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <div class="div-que add-margin">
+        <ion-label class="lbl-head">Are the premises fit for use?</ion-label>
+        <ion-radio-group formControlName="fit_for_use">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+      <ion-item class="item-dropdown add" lines="none">
+        <ion-label position="stacked" class="lbl-dropdown">Works already arranged or performed</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="works_arranged"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Reinstallation">Reinstallation</ion-select-option>
+          <ion-select-option value="Repair">Repair</ion-select-option>
+          <ion-select-option value="Rewiring">Rewiring</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="property_form_step6.controls.works_arranged.hasError('required') && property_form_step6.controls.works_arranged.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="property_form_step6.get('works_arranged').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <ion-input type="text" color="primary" formControlName="works_arranged_other" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="property_form_step6.controls.works_arranged_other.hasError('required') && property_form_step6.controls.works_arranged_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+      <div *ngIf="property_form_step6.get('works_arranged').value">
+        <ion-label class="lbl-contact add-margin">Constractor details</ion-label>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Name Contractor</ion-label>
+          <ion-input type="text" formControlName="contractor_name" color="primary" class="input-box"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="property_form_step6.controls.contractor_name.hasError('required') && property_form_step6.controls.contractor_name.touched">
+          <p class="content">Please Enter Name!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Street</ion-label>
+          <ion-input type="text" formControlName="contractor_street" color="primary" class="input-box"
+            id="contractor_street" (ionFocus)="contractorAddress()"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="property_form_step6.controls.contractor_street.hasError('required') && property_form_step6.controls.contractor_street.touched">
+          <p class="content">Please Enter Street!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">Suburb/Town</ion-label>
+          <ion-input type="text" formControlName="contractor_suburb" color="primary" class="input-box"
+            id="contractor_suburb"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="property_form_step6.controls.contractor_suburb.hasError('required') && property_form_step6.controls.contractor_suburb.touched">
+          <p class="content">Please Enter Town!</p>
+        </ion-item>
+
+        <ion-item lines="none" class="input-item add">
+          <ion-label position="stacked" class="input-lbl">PostCode</ion-label>
+          <ion-input type="number" formControlName="contractor_post_code" color="primary" class="input-box"
+            id="contractor_post_code"></ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="property_form_step6.controls.contractor_post_code.hasError('required') && property_form_step6.controls.contractor_post_code.touched">
+          <p class="content">Please Enter Postcode!</p>
+        </ion-item>
+      </div>
+
+      <div class="div-que add-margin">
+        <ion-label class="lbl-head">Has any cost been paid yet?</ion-label>
+        <ion-radio-group formControlName="cost_paid">
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">Yes</ion-label>
+            <ion-radio slot="start" value="true" mode="md"></ion-radio>
+          </ion-item>
+          <ion-item lines="none" class="items-radio">
+            <ion-label class="lbl-radio">No</ion-label>
+            <ion-radio slot="start" value="false" mode="md"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </div>
+
+      <div class="div-Y" *ngIf="this.property_form_step6.get('cost_paid').value == 'true'">
+        <ion-label class="lbl-contact-blk add-margin">Attach Receipt/Invoice</ion-label>
+        <div class="div-docs">
+          <h3 *ngIf="attach_receipt_image.length == 0" text-center>Please Select Image!</h3>
+          <ion-list>
+            <ion-item *ngFor="let img of attach_receipt_image; index as pos" text-wrap>
+              <ion-thumbnail slot="start">
+                <ion-img *ngIf="img.fileIcon" src="../../../assets/images/files.png"></ion-img>
+                <ion-img *ngIf="!img.fileIcon" [src]="img.path"></ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                {{ img.name }}
+              </ion-label>
+              <ion-button slot="end" fill="clear" (click)="deleteImage(img, pos)">
+                <ion-icon slot="icon-only" name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-list>
+
+          <div class="upload-btn-wrapper">
+            <ion-button fill="clear" color="dark" expand="full" class="btn">Attach Documents</ion-button>
+            <input type="file" (change)="fileUpload($event)"
+              accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+          </div>
+        </div>
+
+        <div class="div-que add-margin">
+          <ion-label class="lbl-head">Are you claiming reimbursement of any costs?</ion-label>
+
+          <ion-radio-group formControlName="costs_reimbursed">
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">Yes</ion-label>
+              <ion-radio slot="start" value="true" mode="md"></ion-radio>
+            </ion-item>
+            <ion-item lines="none" class="items-radio">
+              <ion-label class="lbl-radio">No</ion-label>
+              <ion-radio slot="start" value="false" mode="md"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+
+        <div class="div-Y" *ngIf="this.property_form_step6.get('costs_reimbursed').value == 'true'">
+
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">Name of account</ion-label>
+            <ion-input type="text" formControlName="bank_account_name" color="primary" class="input-box"></ion-input>
+          </ion-item>
+
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="property_form_step6.controls.bank_account_name.hasError('required') && property_form_step6.controls.bank_account_name.touched">
+            <p class="content">Please Enter Name!</p>
+          </ion-item>
+
+          <ion-item lines="none" class="item-dropdown add">
+            <ion-label position="stacked" class="lbl-dropdown">Bank</ion-label>
+            <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="name_bank"
+              class="btn-select bg" mode="md">
+              <ion-select-option *ngFor="let opt of name_bank | keyvalue" [value]="opt.key">{{opt.value}}</ion-select-option>
+              <!-- <ion-select-option value="CBA">CBA</ion-select-option>
+              <ion-select-option value="Bendigo">Bendigo</ion-select-option>
+              <ion-select-option value="WESTPAC">WESTPAC</ion-select-option>
+              <ion-select-option value="NAB">NAB</ion-select-option>
+              <ion-select-option value="ANZ">ANZ</ion-select-option>
+              <ion-select-option value="St George">St George</ion-select-option>
+              <ion-select-option value="HSBC">HSBC</ion-select-option>
+              <ion-select-option value="aa">aa</ion-select-option>
+              <ion-select-option value="Other">Other</ion-select-option>-->
+            </ion-select> 
+          </ion-item>
+
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="property_form_step6.controls.name_bank.hasError('required') && property_form_step6.controls.name_bank.touched">
+            <p class="content">Please Select Required Field!</p>
+          </ion-item>
+
+          <!-- Other -->
+          <div *ngIf="property_form_step6.get('name_bank').value == '1039'">
+            <ion-item lines="none" class="input-item add">
+              <ion-input type="text" color="primary" formControlName="name_bank_other" class="input-box">
+              </ion-input>
+            </ion-item>
+
+            <ion-item no-padding lines="none" class="validator-error"
+              *ngIf="property_form_step6.controls.name_bank_other.hasError('required') && property_form_step6.controls.name_bank_other.touched">
+              <p class="content">Please Enter Required Field!</p>
+            </ion-item>
+          </div>
+
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">Branch</ion-label>
+            <ion-input type="text" formControlName="bank_branch" color="primary" class="input-box"></ion-input>
+          </ion-item>
+
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="property_form_step6.controls.bank_branch.hasError('required') && property_form_step6.controls.bank_branch.touched">
+            <p class="content">Please Enter Branch!</p>
+          </ion-item>
+
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">BSB</ion-label>
+            <ion-input type="text" formControlName="bank_bsb" color="primary" class="input-box"></ion-input>
+          </ion-item>
+
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="property_form_step6.controls.bank_bsb.hasError('required') && property_form_step6.controls.bank_bsb.touched">
+            <p class="content">Please Enter BSB!</p>
+          </ion-item>
+
+          <ion-item lines="none" class="input-item add">
+            <ion-label position="stacked" class="input-lbl">Account number</ion-label>
+            <ion-input type="text" formControlName="bank_account_number" color="primary" class="input-box">
+            </ion-input>
+          </ion-item>
+
+          <ion-item no-padding lines="none" class="validator-error"
+            *ngIf="property_form_step6.controls.bank_account_number.hasError('required') && property_form_step6.controls.bank_account_number.touched">
+            <p class="content">Please Enter Account Number!</p>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next" (click)="propertyStep6Next()">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

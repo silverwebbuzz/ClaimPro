@@ -1,0 +1,184 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-buttons>
+        <ion-button color="primary" (click)="back()">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons> -->
+    <ion-title color="primary" class="head">Fire/Explosion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="fire_explosion_form" autocomplete="off">
+
+    <ion-label class="lbl-contact">Fire/Explosion Details</ion-label>
+
+    <ion-item lines="none" class="item-dropdown add">
+      <ion-label position="stacked" class="lbl-dropdown">Where did the fire or explosion start?</ion-label>
+      <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="fire_explosion_start"
+        class="btn-select bg" mode="md">
+        <ion-select-option value="Inside the building">Inside the building</ion-select-option>
+        <ion-select-option value="Outside the building">Outside the building</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="fire_explosion_form.controls.fire_explosion_start.hasError('required') && fire_explosion_form.controls.fire_explosion_start.touched">
+      <p class="content">Please Select Required Field!</p>
+    </ion-item>
+
+    <div *ngIf="fire_explosion_form.get('fire_explosion_start').value == 'Inside the building'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Where inside the building?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="where_inside_building"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Room">Room</ion-select-option>
+          <ion-select-option value="Storeroom">Storeroom</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="fire_explosion_form.controls.where_inside_building.hasError('required') && fire_explosion_form.controls.where_inside_building.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="fire_explosion_form.get('where_inside_building').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="where_inside_building_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="fire_explosion_form.controls.where_inside_building_other.hasError('required') && fire_explosion_form.controls.where_inside_building_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+    </div>
+
+    <div *ngIf="fire_explosion_form.get('fire_explosion_start').value == 'Outside the building'">
+
+      <ion-item lines="none" class="item-dropdown add">
+        <ion-label position="stacked" class="lbl-dropdown">Where outside the building?</ion-label>
+        <ion-select interface="action-sheet" placeholder="Please Select Option" formControlName="where_outside_building"
+          class="btn-select bg" mode="md">
+          <ion-select-option value="Shed">Shed</ion-select-option>
+          <ion-select-option value="Garage">Garage</ion-select-option>
+          <ion-select-option value="Storeroom">Storeroom</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="fire_explosion_form.controls.where_outside_building.hasError('required') && fire_explosion_form.controls.where_outside_building.touched">
+        <p class="content">Please Select Required Field!</p>
+      </ion-item>
+
+      <!-- Other -->
+      <div *ngIf="fire_explosion_form.get('where_outside_building').value == 'Other'">
+        <ion-item lines="none" class="input-item add">
+          <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+          <ion-input type="text" color="primary" formControlName="where_outside_building_other" class="input-box">
+          </ion-input>
+        </ion-item>
+
+        <ion-item no-padding lines="none" class="validator-error"
+          *ngIf="fire_explosion_form.controls.where_outside_building_other.hasError('required') && fire_explosion_form.controls.where_outside_building_other.touched">
+          <p class="content">Please Enter Required Field!</p>
+        </ion-item>
+      </div>
+
+    </div>
+
+    <!-- Other -->
+    <div *ngIf="fire_explosion_form.get('fire_explosion_start').value == 'Other'">
+      <ion-item lines="none" class="input-item add">
+        <!-- <ion-label position="stacked" class="input-lbl">Policy Holder Business Name</ion-label> -->
+        <ion-input type="text" color="primary" formControlName="fire_explosion_start_other" class="input-box">
+        </ion-input>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="fire_explosion_form.controls.fire_explosion_start_other.hasError('required') && fire_explosion_form.controls.fire_explosion_start_other.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Did the Fire Brigade attend?</ion-label>
+
+      <ion-radio-group formControlName="fire_brigade_attend">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-que add-margin">
+
+      <ion-label class="lbl-head">Did the smoke detectors function?</ion-label>
+
+      <ion-radio-group formControlName="smoke_detectors_function">
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">Yes</ion-label>
+          <ion-radio slot="start" value="true" mode="md"></ion-radio>
+        </ion-item>
+        <ion-item lines="none" class="items-radio">
+          <ion-label class="lbl-radio">No</ion-label>
+          <ion-radio slot="start" value="false" mode="md"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </div>
+
+    <div class="div-N" *ngIf="this.fire_explosion_form.get('smoke_detectors_function').value == 'false'">
+
+      <ion-item lines="none" class="input-item add">
+        <ion-label position="stacked" class="input-lbl">Why not?</ion-label>
+        <ion-textarea rows="3" formControlName="why_not" type="text" color="primary" class="input-box">
+        </ion-textarea>
+      </ion-item>
+
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="fire_explosion_form.controls.why_not.hasError('required') && fire_explosion_form.controls.why_not.touched">
+        <p class="content">Please Enter Required Field!</p>
+      </ion-item>
+      <ion-item no-padding lines="none" class="validator-error"
+        *ngIf="fire_explosion_form.controls.why_not.hasError('maxlength') && fire_explosion_form.controls.why_not.touched">
+        <p class="content">Allow Only 140 Characters!</p>
+      </ion-item>
+
+    </div>
+
+  </form>
+
+</ion-content>
+
+<ion-footer class="btns-footer">
+  <ion-row class="row-footer">
+    <ion-col class="col-footer border-R">
+      <ion-button expand="full" class="btn-back" (click)="back()">
+        <ion-icon name="arrow-round-back" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="col-footer border-L">
+      <ion-button expand="full" class="btn-next">
+        <ion-icon name="arrow-round-forward" mode="md" size="large"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>

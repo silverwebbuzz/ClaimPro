@@ -1,0 +1,29 @@
+.clr{
+    color: green !important;
+    font-weight: bold;
+}
+.clr-red{
+    color: red !important;
+    font-weight: bold;
+}
+.page-myClaim{
+    --background: #f1f1f1;
+
+    .card-main{
+        background: #fff;
+        margin: 5px;
+        box-shadow: 0px 0px 0px 0px;
+        border-radius: 0px;
+
+        .row-card{
+            .col-head{
+                color: var(--ion-color-secondary);
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .col-value{
+                color: var(--ion-color-medium);
+            }
+        }
+    }
+}

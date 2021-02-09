@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button color="primary" (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary" class="head">Change Password</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="change_pass_form" autocomplete="off">
+
+    <ion-item lines="none" class="input-item">
+      <ion-label position="stacked" class="input-lbl">Old Password</ion-label>
+      <ion-input type="password" color="primary" formControlName="old_password" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="change_pass_form.controls.old_password.hasError('required') && change_pass_form.controls.old_password.touched">
+      <p class="content">Please Enter Old Password!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">New Password</ion-label>
+      <ion-input type="password" color="primary" formControlName="password" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="change_pass_form.controls.password.hasError('required') && change_pass_form.controls.password.touched">
+      <p class="content">Please Enter New Password!</p>
+    </ion-item>
+
+    <ion-item lines="none" class="input-item add">
+      <ion-label position="stacked" class="input-lbl">Confirm Password</ion-label>
+      <ion-input type="password" color="primary" formControlName="confirmpassword" class="input-box"></ion-input>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error"
+      *ngIf="change_pass_form.controls.confirmpassword.hasError('required') && change_pass_form.controls.confirmpassword.touched">
+      <p class="content">Please Enter New Password!</p>
+    </ion-item>
+
+    <ion-item no-padding lines="none" class="validator-error add"
+      *ngIf="change_pass_form.hasError('MatchPassword','confirmpassword')">
+      <p class="content">Confirm password does not match with new password.</p>
+    </ion-item>
+  </form>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" size="large" class="btn-bottom" (click)="submit()">SUBMIT</ion-button>
+</ion-footer>
